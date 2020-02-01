@@ -1,0 +1,5 @@
+---
+- name: Checking the connectivity with the remote machine
+  tasks: 
+    - name: Ping test
+      ping: 
