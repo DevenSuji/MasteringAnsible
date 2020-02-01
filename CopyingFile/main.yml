@@ -1,0 +1,8 @@
+---
+- name: Copying the file to target servers.
+  hosts: client
+  tasks:
+    - name: Copying the file
+      copy: 
+        src: /root/MasteringAnsible/MasteringAnsible/README.md
+        dest: /root/
