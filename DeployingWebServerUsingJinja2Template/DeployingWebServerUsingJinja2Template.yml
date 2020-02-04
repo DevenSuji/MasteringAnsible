@@ -1,0 +1,63 @@
+---
+- name: Deploy and Start Apache
+  hosts: client
+  vars:
+    apache_package: httpd
+    firewall_package: firewalld
+    web_service: httpd
+    firewall_service: firewalld
+    rule: http
+    system_owner: dhristideven@sikkim.com
+
+  tasks:
+    - name: Install and Update latest packages
+      yum:
+        name:
+          - "{{ apache_package }}"
+          - "{{ firewall_package }}"
+        state: latest
+
+    - name: Start and Enable {{ firewall_service }}
+      service:
+        name: "{{ firewall_service}}"
+        enabled: true
+        state: started
+    
+    - template: 
+        src: http.j2
+        dest: /etc/httpd/conf.d
+        owner: root
+        group: root
+        mode: 0644
+
+    - name: Creating Web Content
+      copy:
+        content: "Welcome to the Ansible managed web server created by Deven Suji"
+        dest: /var/www/html/index.html
+
+    - name: Start and Enable {{ web_service }}
+      service:
+        name: "{{ web_service }}"
+        enabled: true
+        state: started
+
+    - name: Opening firewall rule for {{ rule }}
+      firewalld:
+        service: "{{ rule }}"
+        permanent: true
+        immediate: true
+        state: enabled
+
+- name: Verifying the deployment of the WEBSEVER
+  hosts: localhost
+  become: false
+  tasks:
+    - name: Testing if the First WebServer is Online Now
+      uri:
+        url: http://client1.sikkim.com
+        status_code: 200
+
+    - name: Testing if the Second WebServer is Online Now
+      uri:
+        url: http://client2.sikkim.com
+        status_code: 200

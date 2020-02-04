@@ -1,5 +1,7 @@
-                                        Variables
+
 ***********************************************************************************************
+VARIABLES
+---------
 If a variable is used at the start of an ITEM then it needs to be double quoted like,
 name:
     - "{{ variable1 }}"
@@ -9,3 +11,9 @@ If a variable is used at the middle of an ITEM the it does not need to be double
     - name: Start and Enable {{ firewall_service }}
 
 ***********************************************************************************************
+ENABLING ROOT SSH ON UBUNTU
+---------------------------
+
+sudo passwd root
+sudo passwd -u root 
+sudo sed -i 's/#PermitRootLogin prohibit-password/PermitRootLogin yes/' /etc/ssh/sshd_config
