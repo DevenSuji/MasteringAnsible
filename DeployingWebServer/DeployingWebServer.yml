@@ -41,7 +41,7 @@
         state: enabled
 
 - name: Verifying the deployment of the WEBSEVER
-  host: localhost
+  hosts: localhost
   become: false
   tasks:
     - name: Testing if the First WebServer is Online Now
