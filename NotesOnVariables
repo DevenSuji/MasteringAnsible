@@ -1,0 +1,11 @@
+                                        Variables
+***********************************************************************************************
+If a variable is used at the start of an ITEM then it needs to be double quoted like,
+name:
+    - "{{ variable1 }}"
+    - "{{ variable2 }}"
+
+If a variable is used at the middle of an ITEM the it does not need to be double quoted like,
+    - name: Start and Enable {{ firewall_service }}
+
+***********************************************************************************************
