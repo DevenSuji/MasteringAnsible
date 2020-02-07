@@ -1,0 +1,25 @@
+---
+- name: Practicing nested loops
+  hosts: client
+  vars:
+    myusers:
+      - pavithra
+      - Mahesh
+    mygroups:
+      - wife
+      - dad
+  tasks:
+    - name: Creating the groups
+      group:
+        name: "{{ item }}"
+        state: present
+      with_items: "{{ mygroups }}"
+
+    - name: Creating the users
+      user:
+        name: "{{ item[0] }}"
+        state: present
+        groups: "{{ item[1] }}"
+      with_nested:
+        - "{{ myusers }}"
+        - "{{ mygroups }}"
