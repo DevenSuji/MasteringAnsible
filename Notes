@@ -1,0 +1,57 @@
+
+***********************************************************************************************
+VARIABLES
+---------
+If a variable is used at the start of an ITEM then it needs to be double quoted like,
+name:
+    - "{{ variable1 }}"
+    - "{{ variable2 }}"
+
+If a variable is used at the middle of an ITEM the it does not need to be double quoted like,
+    - name: Start and Enable {{ firewall_service }}
+
+***********************************************************************************************
+ENABLING ROOT SSH ON UBUNTU
+---------------------------
+
+sudo passwd root
+sudo passwd -u root 
+sudo sed -i 's/#PermitRootLogin prohibit-password/PermitRootLogin yes/' /etc/ssh/sshd_config
+***********************************************************************************************
+WITH_ITEMS
+----------
+
+This is just an equivalent of foreach loop in PowerShell. See the example below
+
+- name: Ensuring httpd and vsftpd are running
+  service:
+    name: "{{ item }}"
+    state: started
+  with_items:
+    - httpd
+    - vsftpd
+
+The list of items can be provided using variable as well. See the example below
+
+vars:
+  web_services:
+    - httpd
+    - vsftpd
+
+tasks:
+  - name: start web services
+    service:
+      name: "{{ item }}"
+      state: started
+    with_items: "{{ web_services }}"
+
+Items can be defined as a hash/dictionary, where each item has a multiple keys. Refer to the items using item.key1 and item.key2
+
+- name: Manage users and group membership
+  user:
+    name: "{{ item.name }}"
+    state: present
+    groups: "{{ item.groups }}"
+  with_items:
+    - {name: 'linda', groups: 'students'}
+    - {name: 'anna', groups: 'profs'}
