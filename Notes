@@ -55,3 +55,31 @@ Items can be defined as a hash/dictionary, where each item has a multiple keys. 
   with_items:
     - {name: 'linda', groups: 'students'}
     - {name: 'anna', groups: 'profs'}
+***********************************************************************************************
+CONDITIONS
+----------
+
+1. Equal on strings ---> ansible_machine == "x84_64"
+2. Equal on numeric ---> max_memory == 1024
+3. Less than        ---> min_memory < 256
+4. Greater than     ---> max_memory > 2048
+5. Less than or equal to       ---> min_memory <= 256
+6. Greater than or equal to       ---> max_memory >= 2048
+7. Not equal to       ---> min_memory != 1024
+8. Variable exists      ---> myvar is defined
+9. Variable does not exist      ---> myvar is not defined
+10. Variable is a boolean      ---> myvar
+11. Variable is a boolean false       ---> not myvar
+
+Example
+
+---
+- hosts: all
+  vars:
+    to_install: samba
+
+  tasks: 
+    - name: Installing {{ to_install }}
+      package:
+        name: "{{ to_install }}"
+      when: to_install is defined
