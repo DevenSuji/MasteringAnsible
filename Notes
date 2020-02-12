@@ -18,8 +18,11 @@ sudo passwd root
 sudo passwd -u root 
 sudo sed -i 's/#PermitRootLogin prohibit-password/PermitRootLogin yes/' /etc/ssh/sshd_config
 ***********************************************************************************************
-WITH_ITEMS
-----------
+LOOPS
+-----
+
+*** WITH_ITEMS
+
 
 This is just an equivalent of foreach loop in PowerShell. See the example below
 
@@ -55,6 +58,16 @@ Items can be defined as a hash/dictionary, where each item has a multiple keys. 
   with_items:
     - {name: 'linda', groups: 'students'}
     - {name: 'anna', groups: 'profs'}
+
+Other LOOPS
+
+*** with_file: A list of file names, item is set to the content of each file.
+
+*** with_fileglob: Same as with_file, but allows globbing patterns in the file names.
+
+*** with_sequence: Generates a sequence of items in increasing numerical order. Can work with start and end to define a range,
+    using decimal, octal, or hexadecimal integer value.
+    
 ***********************************************************************************************
 CONDITIONS
 ----------
