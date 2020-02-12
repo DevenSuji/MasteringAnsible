@@ -1,6 +1,6 @@
 # This playbook creates used and it uses with_items loop
 - name: Create Users
-  hosts: clients
+  hosts: client
   tasks:
     - name: Ensure groups exists
       group:
@@ -18,3 +18,6 @@
       with_items:
         - { name: "DhristiDeven", groups: "BrightStudents" }
         - { name: "DugantDeven", groups: "NaughtyStudents" }
+
+
+
