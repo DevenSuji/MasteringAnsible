@@ -1,0 +1,7 @@
+---
+- name: Checking to see if all the machines are pinging.......
+  hosts: chela
+  tasks:
+          - name: Here we go... Ping Ping
+            ping:
+
