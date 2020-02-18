@@ -1,0 +1,19 @@
+---
+- name: New Index.html
+  hosts: client
+  tasks:
+    - name: Installing httpd
+      yum:
+        name: httpd
+        state: present
+    - name: copy Index.html
+      copy:
+        src: /tmp/index.html
+        dest: /var/www/html/index.html
+      notify:
+        - restart-web
+  handlers:
+    - name: restart-web
+      service:
+        name: httpd
+        state: restarted

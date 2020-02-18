@@ -1,0 +1,11 @@
+---
+- name: Pinging all the machines
+  hosts: all
+  tasks:
+    - name: Making sure that all the machines are reachable
+      ping:
+    - name: Installing PHP
+      yum:
+        name: php5-cli
+        state: present
+        update_cache: yes

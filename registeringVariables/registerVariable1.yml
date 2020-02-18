@@ -1,0 +1,13 @@
+---
+- name: Registering Varaibles Demo 1
+  hosts: client
+  tasks:
+    - name: Capturing the output of WHO Command
+      command: who
+      register: loggedin
+    - name: Debugging the output
+      debug:
+        msg: "{{ loggedin }}"
+    - name: Spewing out the captured output of who
+      shell: echo "user ansible is logged in"
+      when: loggedin.stdout.find('ansible') != -1
