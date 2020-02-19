@@ -14,5 +14,6 @@
         state: absent
   handlers:
     - name: remove httpd
-      yum: httpd
-      state: absent
+      yum:
+        name: httpd
+        state: absent
