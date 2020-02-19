@@ -68,6 +68,8 @@ Other LOOPS
 *** with_sequence: Generates a sequence of items in increasing numerical order. Can work with start and end to define a range,
     using decimal, octal, or hexadecimal integer value.
     
+*** with_random_choice: Takes a list, and item is set to one of the list items at random.
+
 ***********************************************************************************************
 CONDITIONS
 ----------
@@ -84,7 +86,7 @@ CONDITIONS
 10. Variable is a boolean      ---> myvar
 11. Variable is a boolean false       ---> not myvar
 
-Example
+Example1
 
 ---
 - hosts: all
@@ -96,6 +98,26 @@ Example
       package:
         name: "{{ to_install }}"
       when: to_install is defined
+
+Example2
+
+---
+- hosts: all
+  vars:
+    my_user: linda
+
+  superusers:
+    - root
+    - linda
+
+  tasks:
+    - name: Run only if Linda is superusers
+      user:
+        name: "{{ my_user }}"
+        groups: wheel
+        append: yes
+      when: my_user in superusers
+
 ***********************************************************************************************
 
 INVENTORY
