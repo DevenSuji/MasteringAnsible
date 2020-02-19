@@ -271,6 +271,69 @@ TAGS
     ... tagged runs any tagged resources.
     ... untagged excludes all the tagged resources
     ... all runs all tasks (which is default behaviour ans also happens if no tags have been specified)
-    
+
+
+***********************************************************************************************
+
+ERROR HANDLING
+--------------
+
+1. Default behavior: On failure, play execution stops, exceptions are possible.
+2. Use ignore_errors to continue after the failure
+
+Example.
+
+---
+- package
+    name: boris
+    state: lastest
+  ignore_errors: yes
+
+EXEDCUTION HANDLERS EVEN AFTER TASK FAILURE
+-------------------------------------------
+
+1. If a task in a play failes, then no handlers will be executed. This is the default behaviour.
+2. Use force_handlers: yes to execute handlers that were triggered by a previous action anyway
+
+Example.
+
+---
+- hosts: all
+  force_handlers : yes
+  tasks: 
+    - name: task a
+      command: /bin/yes
+      notify: handlera
+  
+  handlers:
+    - name: handlera
+        command: /bin/true
+
+
+USING FAILED_WHEN
+-----------------
+1. failed_when can be used to specify when a command is considered failed.
+2. Useful for commands that produce a specific output.
+
+Example.
+
+---
+tasks:
+  - shell: /usr/local/bin/mkusr.sh
+    register: mkusr_result
+    failed_when: "'Password missing' in mkusr_result.stdout
+
+USING CHANGED_WHEN
+------------------
+
+1. If a module thinks that it changed the state of the affected machine, it will report "changed" status.
+2. This is not always true or desired and for that reason may be overwritten or further specified.
+3. As a result, the module will not generate a "changed" state.
+
+Example.
+
+- shell: wall 'beep'
+  changed_when: false
+
 
 
