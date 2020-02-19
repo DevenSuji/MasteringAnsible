@@ -1,19 +1,24 @@
 ---
-- name: Clean up Web Server
-  hosts: all
+- name: Set up Web Server
+  hosts: client
+  force_handlers: True
   tasks:
-    - name: Stop Web
-      service:
-        name: httpd
-        state: stopped
-      notify:
-        - remove httpd
-    - name: remove index.html
-      file:
-        path: /var/www/html/index.html
-        state: absent
-  handlers:
-    - name: remove httpd
+    - name: Install httpd
       yum:
         name: httpd
-        state: absent
+        state: latest
+    - name: Copy index.html
+      copy:
+        src: /tmp/index.html
+        dest: /var/www/html/index.html
+      notify:
+        - restart_web
+    - name: Copy nothing.html
+      copy:
+        src: /tmp/nothing.html
+        dest: /var/www/html/index.html
+  handlers:
+    - name: restart_web
+      service:
+        name: httpd
+        state: restarted
