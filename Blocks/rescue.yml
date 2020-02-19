@@ -1,0 +1,17 @@
+---
+- name: This is how you run the rescue.
+  hosts: client
+  tasks:
+    - block:
+        - name: Upgrade the Database
+          shell:
+            cmd: /usr/local/lib/upgrade-database
+        rescue:
+        - name: Revert if failure
+          shell:
+            cmd: /usr/local/lib/revert-database
+        always:
+        - name: Always restart the Database
+          service: 
+            name: mariadb
+            state: restarted
