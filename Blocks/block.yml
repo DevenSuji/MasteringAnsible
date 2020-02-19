@@ -15,4 +15,4 @@
             name: httpd
             state: started
             enabled: True
-  when: ansible_distribution == 'CentOS'
+      when: ansible_distribution == 'CentOS'
