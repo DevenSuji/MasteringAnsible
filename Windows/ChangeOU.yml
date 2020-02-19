@@ -1,0 +1,11 @@
+---
+- name: Creating Security Group in Active Directory
+  hosts: win
+  tasks:
+    - name: Changing the OU of a group using the SID and ignore the protection flag
+      win_domain_group:
+        name: S-1-5-21-1306107516-3755408812-3066010077-1105
+        scope: global
+        organizational_unit: OU=Groups,DC=Sikkim,DC=Com
+        ignore_protection: True
+

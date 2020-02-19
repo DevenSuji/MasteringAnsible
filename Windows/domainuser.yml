@@ -1,0 +1,24 @@
+---
+- name: Create Domain Users
+  hosts: win
+  tasks:
+    - name: Ensure user Ansible is present with address information
+      win_domain_user:
+        name: Ansible
+        firstname: Ansible
+        surname: Automation
+        company: Sikkim
+        password: Mer0*Chamkauchu
+        state: present
+        groups:
+          - Domain Admins
+          - Enterprise Admins
+          - Schema Admins
+        street: 1038/22 3rd Cross Vivekananda Road Adithya Layout Hinkal Vijaynagar 4th Stage
+        city: Mysuru
+        state_province: Karnataka
+        postal_code: 570032
+        country: India
+        attributes:
+          telephoneNumber: +91 99162 53336
+

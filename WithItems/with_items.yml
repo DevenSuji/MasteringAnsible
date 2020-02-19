@@ -1,0 +1,21 @@
+# This playbook creates used and it uses with_items loop
+- name: Create Users
+  hosts: client
+  tasks:
+    - name: Ensure groups exists
+      group:
+        name: "{{ item }}"
+        state: present
+      with_items:
+        - BrightStudents
+        - NaughtyStudents
+
+    - name: Manage Users and Group Membership
+      user:
+        name: "{{ item.name }}"
+        state: present
+        groups: "{{ item.groups }}"
+      with_items:
+        - { name: "DhristiDeven", groups: "BrightStudents" }
+        - { name: "DugantDeven", groups: "NaughtyStudents" }
+

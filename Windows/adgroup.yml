@@ -1,0 +1,14 @@
+---
+- name: Creating Security Group in Active Directory
+  hosts: win
+  tasks:
+    - name: Creating and AD group with delete protection enabled and custom attributes
+      win_domain_group:
+        name: Ansible_Admins
+        scope: domainlocal
+        category: security
+        attributes:
+          mail: ansible.admins@sikkim.com
+          wWWHomePage: www.sikkim.com
+        ignore_protection: yes
+
