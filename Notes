@@ -252,5 +252,25 @@ COMBINING LOOPS AND CONDITIONS
   8. Handlers run after all the other tasks in the playbook runs first. Once all the tasks are run, only then the handlers are run.
   9. Handler names must be globally unique, they are defines in the gloabl area like config variables.
   10. Handlers cannot be included.
-  
+
+***********************************************************************************************
+
+TAGS
+----
+
+1. Tags are used at a resource level to give a name to a specific resource.
+2. The --tags option is used with ansible-playbook to run only resources with a specific tag.
+3. When a task file is included in a playbook, it can be tagged in the include statement.
+4. Note that when tagging a role or inclusion, the tag applies to everything in the role or the inclusion.
+5. When ansible-playbook --tags 'tagname' is used, only resources marked with those tags will run. This means 
+   that if a resource at the same level doesn't have a tag, it won't run.
+6. Tags can also be used as --skip-tags 'tagname' to exclude resources with a specific tag.
+7. There is a special tag call always. This can be used to make sure a resource is always executed, unless specifically
+   excluded with --skip-tags option. 
+8. The --tags option has has 3 specific tags as arguments
+    ... tagged runs any tagged resources.
+    ... untagged excludes all the tagged resources
+    ... all runs all tasks (which is default behaviour ans also happens if no tags have been specified)
+    
+
 
