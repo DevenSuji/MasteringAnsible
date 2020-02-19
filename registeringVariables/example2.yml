@@ -1,0 +1,9 @@
+---
+- name: Registering Variables Demo 1
+  hosts: all
+  tasks:
+    - name: Capturing the output of WHO command
+      command: who
+      register: loggedin
+    - shell: echo "User devensuji is logged in"
+      when: loggedin.stdout.find('devensuji') != -1
