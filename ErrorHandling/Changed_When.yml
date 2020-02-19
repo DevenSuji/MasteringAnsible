@@ -1,0 +1,7 @@
+---
+- name: Practising the scenario where even when the command runs successfully the changed value is not the expected one
+  hosts: client
+  tasks: 
+    - name: This command does run on the hosts but the output does not show changed as True
+      shell: wall 'beep'
+      changed_when: false
