@@ -10,6 +10,14 @@ name:
 If a variable is used at the middle of an ITEM the it does not need to be double quoted like,
     - name: Start and Enable {{ firewall_service }}
 
+MAGIC VARIABLES
+---------------
+
+- name:
+  package:
+    name: vsftpd
+  when: inventory_hostname in groups["ftpservers"]
+
 ***********************************************************************************************
 ENABLING ROOT SSH ON UBUNTU
 ---------------------------
@@ -118,6 +126,12 @@ Example2
         append: yes
       when: my_user in superusers
 
+Example of When Conditions
+
+1. ansible_system_vendor == "VMware, Inc." and ansible_processor_cores == 1
+2. ansible_distribution == "CentOS" or ansible_distribution == "Fedora"
+3. (ansible_distribution == "CentOS" and ansible_processor_cores == 1) or (ansible_distribution == "Fedora" and ansible_system_vendor == "VMware, Inc.")
+
 ***********************************************************************************************
 
 INVENTORY
@@ -205,4 +219,20 @@ If it is, the file will be executed, and Ansible will switch to using its JSON p
 If it’s not executable, it will be read by Ansible with the assumption that it’s in the INI file format, and it 
 will fail to be parsed if it is a static JSON file.
 
+***********************************************************************************************
+ANSIBLE FACTS
+--------------
+ansible all -m setup -a "filter=ansible_distribution" >>> To capture a particular ansible fact. Here the fact is ansible_distribution
+ansible all -m setup >>> To look into all the facts of each machine.
 
+***********************************************************************************************
+
+COMBINING LOOPS AND CONDITIONS
+
+---
+- name: Install vsftpd if sufficient space on /var/ftp
+  package:
+    name: vsftpd
+    state: lastest
+  with_items: "{{ ansible_mounts }}"
+  when: item.mount == "/var/ftp" and item.size.available > 9000000000

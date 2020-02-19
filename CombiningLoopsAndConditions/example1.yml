@@ -1,0 +1,10 @@
+---
+- name: COMBINING LOOPS AND CONDITIONS
+  hosts: client
+  tasks:
+    - name: Install vsftpd if sufficient space on /var/ftp
+      package:
+        name: vsftpd
+        state: latest
+      with_items: "{{ ansible_mounts }}"
+      when: item.mount == "/var/ftp" and item.size.available > 9000000000
