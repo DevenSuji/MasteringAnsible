@@ -1,3 +1,7 @@
+# This playbook uses force_handlers: True. Usually a playbook will stop is a task fails to run. Here we are deliberately making the task to fail by trying to copy
+# a file that does not exist. Ideally the play should stop when the task fails to run, but since we've used force_handlers: True, the handler will still be executed
+# even when the task fails
+
 ---
 - name: Set up Web Server
   hosts: client
