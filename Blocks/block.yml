@@ -1,7 +1,7 @@
 ---
 - name: This is how you run block
   hosts: client
-  tasks: 
+  tasks:
     - name: Install Apache
       block:
         - package:
@@ -15,4 +15,4 @@
             name: httpd
             state: started
             enabled: True
-    when: ansible_distribution == 'CentOS'
+  when: ansible_distribution == 'CentOS'
