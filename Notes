@@ -236,3 +236,21 @@ COMBINING LOOPS AND CONDITIONS
     state: lastest
   with_items: "{{ ansible_mounts }}"
   when: item.mount == "/var/ftp" and item.size.available > 9000000000
+
+  ***********************************************************************************************
+
+  HANDLERS
+  --------
+
+  1. A handler is a task that is going to be executed if another task is successfull. 
+  2. A handler is a conditional task that only runs after being notified  by another task.
+  3. Handlers have a globally unique name and are triggered after all tasks in the playbook.
+  4. Apart from that a handler is triggered by one or kore other tasks in the playbook; all of its properties are task properties.
+  5. To trigger a handler, the playbook must have a notify: item, that calls the name of the handler.
+  6. More than one handler can be called from a task.
+  7. Handlers always run in the order in which the handlers section is written, not in the order of how the are called in the plays.
+  8. Handlers run after all the other tasks in the playbook runs first. Once all the tasks are run, only then the handlers are run.
+  9. Handler names must be globally unique, they are defines in the gloabl area like config variables.
+  10. Handlers cannot be included.
+  
+

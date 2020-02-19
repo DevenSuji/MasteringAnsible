@@ -5,7 +5,8 @@
     - name: Installing httpd
       yum:
         name: httpd
-        state: present
+#        state: present
+  tasks:
     - name: copy Index.html
       copy:
         src: /tmp/index.html
