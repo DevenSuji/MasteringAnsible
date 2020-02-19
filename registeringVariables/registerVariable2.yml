@@ -1,0 +1,20 @@
+---
+- name: Lopping using registered variable
+  hosts: client
+  tasks:
+    - name: Creating the backup spooler directory
+      file:
+        path: /var/bkspool
+        state: directory
+    - name: Retrieving the list of home directories
+      command: ls /home
+      register: home_dirs
+    - name: Printing the captured output
+      debug:
+        msg: "{{ home_dirs }}"
+    - name: Adding home dirs to the backup spooler
+      file:
+        path: /var/bkspool/{{ item }}
+        src: /home/{{ item }}
+        state: link
+      loop: "{{ home_dirs.stdout_lines }}"

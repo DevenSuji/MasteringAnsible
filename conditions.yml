@@ -8,3 +8,4 @@
         state: latest
       with_items: "{{ ansible_mounts }}"
       when: item.mount == "/var/ftp" and item.size_available > 10000000000
+

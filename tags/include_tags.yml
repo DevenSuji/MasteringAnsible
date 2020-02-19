@@ -1,0 +1,6 @@
+---
+- name: Using Include with Tags
+  hosts: client
+  - include: tags1.yml
+    tags:
+      - net_analysis

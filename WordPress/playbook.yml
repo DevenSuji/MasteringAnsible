@@ -1,0 +1,48 @@
+---
+- name: Installing the WordPress Application.
+  hosts: chela
+  tasks:
+    - name: Install PHP
+      apt:
+        name: "{{ item }}"
+        state: present
+      with_items:
+        - php
+        - php-fqm
+        - php-mysql
+        - php-xml
+    - name: Removing Apache
+      apt:
+        name: apache2
+        state: absent
+    - name: Installing MySQL
+      apt:
+        name: "{{ item }}"
+        state: present
+      with_items:
+        - mysql-server-5.6
+        - python-mysqldb
+    - name: Generating New Password
+      command: openssl rand -hex 7
+      register: mysql_new_root_pass
+    - name: Remove anonymous users
+      mysql_user:
+        name: ""
+        state: absent
+    - name: Remove Test Databases
+      mysql_db:
+        name: test
+        state: absent
+    - name: Updating the Root Password
+      mysql_user:
+        name: root
+        host: "{{ item }}"
+        password: "{{ mysql_new_root_pass.stdout }}"
+      with_items:
+        - "{{ ansible_hostname }}"
+        - 127.0.0.1
+        - ::1
+        - localhost
+    - name: Output new root password
+      debug:
+        msg: "New root password is {{ mysql_new_root_pass.stdout }}"
