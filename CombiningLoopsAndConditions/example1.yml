@@ -8,3 +8,8 @@
         state: latest
       with_items: "{{ ansible_mounts }}"
       when: item.mount == "/var/ftp" and item.size.available > 9000000000
+      register: output_status
+
+    - name: Debugging the output
+      debug:
+        msg: output_status
