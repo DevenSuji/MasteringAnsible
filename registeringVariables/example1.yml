@@ -1,0 +1,10 @@
+---
+- name: Install vsftpd only if sufficient space on /var/ftp
+  hosts: client
+  tasks:
+    - name: Installing only if the condition meets
+      package:
+        name: vsftpd
+        state: latest
+      with_items: "{{ ansible_mounts }}"
+      when: item.mount == "/var/ftp" and item.size_available > 999999999999
