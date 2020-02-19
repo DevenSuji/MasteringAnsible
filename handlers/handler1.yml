@@ -5,8 +5,12 @@
     - name: Installing httpd
       yum:
         name: httpd
-#        state: present
-  tasks:
+        state: present
+    - name: Creating the directory
+      file:
+        path: /var/www/html
+        state: directory
+        mode: "0755"
     - name: copy Index.html
       copy:
         src: /tmp/index.html
