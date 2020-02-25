@@ -334,6 +334,101 @@ Example.
 
 - shell: wall 'beep'
   changed_when: false
+***********************************************************************************************
+ROLES
+-----
+
+1. Even simple projects should have their own directory structure.
+2. Withing that directory structure you'll have the ansible.cfg, inventory as well as playbooks.
+3. If the project grows bigger, variable files as well as includes may be used.
+4. Roles can be used to standardize and easily reuse specific parts of ansible.
+5. Consider a role as a complete project dedicated to a specific task that is going to be included from the main playbook.
+6. Best practices are defined in the Ansible Documentation: https://docs.ansible.com/ansible/latest/user_guide/playbooks_best_practices.html
+
+
+a. Ansible Roles provides uniform ways to load tasks, handlers, and variables from external files.
+b. A role typically corresponds to the type of service that is offered(web, databse, etc.)
+c. The purpose if to keep the size of playbooks manageable.
+d. Roles use a specific directory structure, with locations for defaults, handlers, tasks, templates, and variables.
+e. When working with roles, generic profiles are defined in a role.
+f. For specific (groups of) servers, specific playbooks may be created to include one or more roles.
+g. To manage what should happen, default variables are set in the role, which can be overwritten at the playbook level.
+h. To make working with roles easier, community roles can be downloaded from Ansible Galaxy.
+i. Roles are defined in a roles directory, which is created in project directory.
+j. Jinja2 templates are very useful in roles, as they allow working with flexible parameters that are set as variables or facts.
+
+Role Directory Structure Contents
+1. defaults: Contains a main.yml with default values for variables.
+2. files: Static files that are referenced by role tasks.
+3. handlers: Contains a main.yml with handler definitions.
+4. meta: Contains main.yml with information about the rols, including author, license, platforms, and dependencies.
+5. tasks: Has a main.yml file with task definitions.
+6. vars: Has a main.yml file with role variable definitions.
+
+Understanding Role Variables.
+1. Role variables are defines in vars/main.yml.
+2. These variables have a high priority and cannot be overridden by inventory variables.
+3. Default variables can be defined in defaults/main.yml and have the lowest precedence.
+4. Use default variable only if you intend to have the variable overidden somewhere else.
+  a. Overriding variables is common as roles are used as templates, where specific variables may be overridden in specific playbook. 
+
+Rough Syntax of using roles.
+
+---
+- hosts: server1.example.com
+  roles:
+    - role1
+    - role2
+
+Defining Role Dependencies in meta/main.yml
+
+a. Roles may include other roles.
+b. Dependencies are written to the meta/main.yml withing the role.
+
+---
+dependencies:
+  - { role: apache, port: 80 }
+  - { role: mariadb, dbname: addresses, admin_user: bob }
 
 
 
+Order Of Execution
+
+a. Normally, tasks in a role execute before the tasks of the playbook using them.
+b. Two solutions to override that are:
+  1. pre_tasks are performed before roles are applied.
+  2. post_tasks are performed after completing all roles.
+
+Pre/Post tasks execution examples.
+
+---
+- hosts: server1.example.com
+  pre_tasks:
+    - debug:
+        msg: 'starting'
+
+  roles: 
+    - role1
+    - role2
+  tasks: 
+    - debug:
+        msg: 'still working'
+
+  post_tasks:
+    - debug:
+        msg: 'goodbye'
+
+Role Structure Example (motd)
+
+roles/
+|-- motd
+  |-- defaults
+  |   |-- main.yml
+  |-- files
+  |-- handlers
+  |-- tasks
+  |   |-- main.yml
+  |-- templates
+      |-- motd.j2
+
+      
