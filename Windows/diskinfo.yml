@@ -1,0 +1,12 @@
+---
+- name: Querying the machine for it's drive details.
+  hosts: win
+  tasks:
+    - name: Get disk facts
+      win_disk_facts:
+
+    - name: Output first disk size
+      debug:
+        var: ansible_facts.disks[0].size
+         # - ansible_facts.disks[0].size
+         # - ansible_facts.disks[1].size
