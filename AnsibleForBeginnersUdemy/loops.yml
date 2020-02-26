@@ -1,0 +1,20 @@
+---
+- name: Creating Multiple Users
+  hosts: worker
+  tasks:
+    - name: Here I go....
+      user:
+        name: "{{ item }}"
+        state: present
+      loop:
+        - Pavithra
+        - Deven
+        - Dhrishti
+        - Duganth
+        - Nanjamma
+        - Mahesh
+        - Harsha
+        - Kavya
+        - Laxmi
+        - Bhupen
+        - Basanth
