@@ -8,7 +8,7 @@
       - name: mysql
         required: True
       - name: apache
-        required: False
+        required: True
   tasks:
     - name: Installing {{ item.name }} on Debian Systems.
       apt:
