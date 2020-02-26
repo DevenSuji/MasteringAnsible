@@ -55,3 +55,43 @@
     LOOPS AND WITH_ITEMS
 
     Loops is the new way of using with_items.
+
+    *************************************************************************************************************************
+
+    ROLES
+    -----
+
+    Either the roles directory can be placed on the same level on which the playbook.yml is placed or the default roles directory can 
+    be used which is /etc/ansible/roles. If the roles folder is not defined at the same level as the playbook, ansible looks at the 
+    default directory /etc/ansible/roles. 
+
+    ANSIBLE GALAXY COMMANDS
+
+    1. ansible-galaxy search <nameOfRole> ---> To search the desired role in Ansible Galaxy.
+    2. ansible-galaxy install <nameOfRole> ---> To use the role.
+    3. ansible-galaxy list ---> To see the list of roles downloaded.
+    4. ansible-config dump | grep ROLE ---> To see the default path of the role.
+    5. ansible-galaxy install <RoleName> -p ./roles ---> To download the role from ansible galaxy to the current directory.
+
+    Below are the examples of how to call the role from the playbook
+
+    Example 1
+    ---
+    - name: Install and Configure MySQL
+      hosts: someserver
+      roles:
+        - geerlingguy.mysql
+        - nginx
+
+    Example 2
+    ---
+    - name: Install and Configure MySQL
+      hosts: db-servers
+      roles:
+        - geerlingguy.mysql
+
+    - name: Install and Configure Web Server
+      hosts: web-server
+      roles:
+        - nginx
+
