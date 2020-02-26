@@ -1,6 +1,6 @@
 ---
 - name: Install Softwares
-  hosts: workers
+  hosts: worker
   vars:
     packages:
       - name: nginx
