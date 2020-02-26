@@ -1,0 +1,20 @@
+---
+- name: Creating Multiple Users
+  hosts: worker
+  tasks:
+    - name: Here I go....
+      user:
+        name: "{{ item.name }}"
+        uid: "{{ item.uid }}"
+        state: present
+      loop:
+        - name: pavithra
+          uid: 1010
+        - name: deven
+          uid: 1011
+        - name: dhrishti
+          uid: 1012
+        - name: duganth
+          uid: 1013
+        - name: namjamma
+          uid: 1014

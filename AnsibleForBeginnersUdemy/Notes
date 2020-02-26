@@ -51,3 +51,7 @@
     [all_servers:children]
     web_servers
     db_servers
+    *************************************************************************************************************************
+    LOOPS AND WITH_ITEMS
+
+    Loops is the new way of using with_items.

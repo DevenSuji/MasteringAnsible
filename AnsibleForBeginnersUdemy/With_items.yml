@@ -6,7 +6,7 @@
       user:
         name: "{{ item }}"
         state: present
-      loop:
+      with_items:
         - pavithra
         - deven
         - dhrishti
