@@ -13,6 +13,6 @@
     - name: Installing {{ item.name }} on Debian Systems.
       apt:
         name: "{{ item.name }}"
-        state: present
+        state: absent
       when: item.required == True
       loop: "{{ packages }}"
