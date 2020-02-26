@@ -6,6 +6,10 @@
       command: service httpd status
       register: result
 
+    - name: Debugging the result
+      debug:
+        msg:
+
     - name: Sending email if the service is down
       mail:
         to: Deven.Suji.ap@nielsen.com
