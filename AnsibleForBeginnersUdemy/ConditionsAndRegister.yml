@@ -1,0 +1,14 @@
+---
+- name: Check status of service and email if it is down.
+  hosts: worker
+  tasks:
+    - name: Checking the status of httpd service
+      command: service httpd status
+      register: result
+
+    - name: Sending email if the service is down
+      mail:
+        to: Deven.Suji.ap@nielsen.com
+        subject: HTTPD Service Alert
+        body: Https service is down
+      when: result.stdout.find('down') != -1
