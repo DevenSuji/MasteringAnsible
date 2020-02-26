@@ -1,0 +1,53 @@
+    Inventory
+    ---------
+
+    If an inventory file is not defined by a user, then ansible uses the default inventory file located at /etc/ansible/hosts.
+    Ansible inventory file can be of ini or json format.
+
+    Inventory with Alias.
+
+    web ansible_host=server1.example.com
+    db ansible_host=server1.example.com
+    mail ansible_host=server1.example.com
+    ad ansible_host=server1.example.com
+
+    In the above example web, db, mail, and ad are alias. When defining alias for a host ensure that ansible_host= is mentioned in front of the hostname.
+    Other inventory parameters are:
+    1. ansible_connection - ssh/winrm/localhost
+    2. ansible_port - 22/5986
+    3. ansible_user - root/administrator
+    4. ansible_ssh_pass - Password
+
+    In the below example hosts are mentioned along with their parameters in an inventory file.
+
+    Example1
+
+    web ansible_host=server1.example.com ansible_connection=ssh ansible_user=root 
+    db ansible_host=server1.example.com ansible_connection=winrm ansible_user=admin ansible_port=5986 ansible_ssh_pass=P@55w0rd
+    mail ansible_host=server1.example.com ansible_connection=ssh ansible_user=root
+    ad ansible_host=server1.example.com ansible_connection=winrm ansible_user=admin ansible_port=5986 ansible_ssh_pass=P@55w0rd
+
+    Example2
+
+    # Sample Inventory File
+
+    # Web Servers
+    web1 ansible_host=server1.company.com ansible_connection=ssh ansible_user=root ansible_ssh_pass=Password123!
+    web2 ansible_host=server2.company.com ansible_connection=ssh ansible_user=root ansible_ssh_pass=Password123!
+    web3 ansible_host=server3.company.com ansible_connection=ssh ansible_user=root ansible_ssh_pass=Password123!
+
+    # Database Servers
+    db1 ansible_host=server4.company.com ansible_connection=winrm ansible_user=administrator ansible_password=Password123!
+
+
+    [web_servers]
+    web1
+    web2
+    web3
+
+    [db_servers]
+    db1
+
+    [all_servers:children]
+    web_servers
+    db_servers
