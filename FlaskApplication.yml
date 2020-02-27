@@ -4,11 +4,56 @@
   tasks:
     - name: Checking to see if all the target servers are reachable
       ping:
-    # - name: Install Dependencies
-    # - name: Install MySQL Database
-    # - name: Start MySQL Service
-    # - name: Create Application Database
-    # - name: Create Application DB User
-    # - name: Install Python Flask Dependencies
-    # - name: Copy web server code
-    # - name: Run Web Server
+
+    - name: Install Dependencies
+      apt:
+        name: "{{ item }}"
+        state: installed
+      with_items:
+        - python
+        - python-setuptools
+        - python-dev
+        - build-essential
+        - python-pip
+        - python-mysqldb
+
+    - name: Install MySQL Database
+      apt:
+        name: "{{ item }}"
+        state: installed
+      with_items:
+        - mysql-server
+        - mysql-client
+
+    - name: Start MySQL Service
+      service:
+        name: mysql
+        state: started
+        enabled: yes
+
+    - name: Create Application Database
+      mysql_db:
+        name: employee_db
+        state: present
+
+    - name: Create Application DB User
+      mysql_user:
+        name: db_user
+        password: Mer0*Chamkauchu
+        priv: "*.*:ALL"
+        state: present
+
+    - name: Install Python Flask Dependencies
+      pip:
+        name: "{{ item }}"
+      with_items:
+        - flask
+        - flask-mysql
+
+    - name: Copy web server source code
+      copy:
+        src: app.py
+        dest: /opt/app.py
+
+    - name: Starting the Web Server
+      shell: FLASK_APP=app.py nohup flask run --host=0.0.0.0 &
