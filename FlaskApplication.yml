@@ -4,11 +4,11 @@
   tasks:
     - name: Checking to see if all the target servers are reachable
       ping:
-    - name: Install Dependencies
-    - name: Install MySQL Database
-    - name: Start MySQL Service
-    - name: Create Application Database
-    - name: Create Application DB User
-    - name: Install Python Flask Dependencies
-    - name: Copy web server code
-    - name: Run Web Server
+    # - name: Install Dependencies
+    # - name: Install MySQL Database
+    # - name: Start MySQL Service
+    # - name: Create Application Database
+    # - name: Create Application DB User
+    # - name: Install Python Flask Dependencies
+    # - name: Copy web server code
+    # - name: Run Web Server
