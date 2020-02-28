@@ -1,3 +1,6 @@
 ---
-- name: Triggering the reboot
-  reboot:
+- name: Rebooting lots of machines...
+  hosts: ubuntuclients
+  tasks:
+    - name: Triggering the reboot
+      reboot:
