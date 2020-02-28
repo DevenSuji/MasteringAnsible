@@ -7,7 +7,7 @@
 
 - name: Copy web server source code
   copy:
-    src: /root/MasteringAnsible/ProductionGrade/app.py
+    src: /root/MasteringAnsible/Includes/app.py
     dest: /opt/app.py
 
 - name: Starting the Web Server
