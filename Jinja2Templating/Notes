@@ -1,0 +1,27 @@
+STRING MANIPULATION - FILTERS IN JINJA2 TEMPLATING
+
+The name is {{ my_name }} => The name is Deven
+The name is {{ my_name | upper }} => The name is DEVEN
+The name is {{ my_name | lower }} => The name is Deven
+The name is {{ my_name | title  }} => The name is Deven
+The name is {{ my_name | replace("Deven", "Duganth") }} => The name is Duganth
+The name is {{ first_name | default("Duganth") }} {{ my_name }} => The name is Duganth Deven
+
+FILTERS - LIST AND SET
+
+{{ [1, 2, 3] | min }} => 1 # Selects the minimum value
+{{ [1, 2, 3] | max }} => 3 # Selects the maximum value
+{{ [1, 2, 3, 2] | unique }} => 1 2 3 # Selects the unique value
+{{ [1, 2, 3, 4] | union([4, 5]) }} => 1,2,3,4,5 # Selects the unique values across both the arrays.
+{{ [1, 2, 3, 4] | intersect([4, 5]) }} => # Selects the common value in the two seperate arrays.
+{{ 100 | ramdom}} => Ramdom Number # Selects a ramdom number between 0 to 100.
+{{ ["The", "name", "is", "Deven"] | join (" ")}} => The name is Deven # Joins the strings
+
+
+FILTERS - FILE
+
+{{ "/etc/hosts" | basename }} => hosts # Used when we need to get the file name from the path of the file in Linux.
+{{" c:\windows\hosts" | win_basename }} => hosts # Used when we need to get the file name from the path of the file in Windows.
+{{" c:\windows\hosts" | win_splitdrive }} => ["c:", "\windows\hosts"] # Splits the drive from the path
+{{" c:\windows\hosts" | win_splitdrive | first }} => "c:" # Selects the first element in the array which will be the drive letter.
+{{" c:\windows\hosts" | win_splitdrive | last }} => "\windows\hosts" # Selects the last element in the array with will be the path.

@@ -1,0 +1,18 @@
+FILE LOOKUP
+
+# CSV File - credentials.csv file
+
+Hostname,Password
+Target1,Passw0rd
+Target1,Passw0rd
+
+The grab the password from the above csv file use the below lookup pluggin
+
+        TypeOfFile                FileToLookup
+         --------           -------------------------
+{{lookup('csvfile','target1 file=/tmp/credentials.csv delimiter=,')}} => Passw0rd
+                    -------
+                ValueToLookup
+
+
+Search for LOOKUPS in Ansible Documentation
