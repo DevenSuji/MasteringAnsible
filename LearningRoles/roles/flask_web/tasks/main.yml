@@ -9,7 +9,7 @@
 
 - name: Copy web server source code
   copy:
-    src: /root/MasteringAnsible/Includes/app.py
+    src: app.py
     dest: /opt/app.py
 
 - name: Starting the Web Server

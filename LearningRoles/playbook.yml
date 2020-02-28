@@ -1,0 +1,9 @@
+---
+- name: Deploying a Web Application using Ansible Roles
+  hosts: ubuntuclients
+  roles:
+    - connectivity_check
+    - install_dependencies
+    - mysql_db
+    - flask_web
+    
