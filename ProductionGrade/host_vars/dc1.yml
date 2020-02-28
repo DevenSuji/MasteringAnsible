@@ -1,0 +1,11 @@
+# Instead of assigning the variables in the inventory file for each hosts, the same variables can be defined here in the host_vars
+# directory. The name of each host goes as the name of the file in this directory.
+---
+ansible_user: administrator
+ansible_password: Mer0*Chamkauchu
+ansible_port: 5896
+ansible_connection: winrm
+ansible_winrm_server_cert_validation: ignore
+ansible_winrm_transport: kerberos
+ansible_winrm_scheme: https
+ansible_winrm_kerberos_delegation: true
