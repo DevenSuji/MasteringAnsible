@@ -1,0 +1,6 @@
+---
+- name: Need to reboot the hosts? Here I'm...
+  hosts: ubuntuclients
+  tasks:
+    - name: Triggering the reboot
+      reboot:
