@@ -1,21 +1,21 @@
-[client]
-client1
-client2
+#[client]
+#client1
+#client2
 
-[master]
-tower
+#[master]
+#tower
 
-[linux]
-tower
-client1
-client2
+#[linux]
+#tower
+#client1
+#client2
 
-#[kubemaster]
-#master
+[ubuntutower]
+ansibletower
 
-#[worker]
-#worker1
-#worker2
+[ubuntuclients]
+client3
+client4
 
 #[win]
 #dc1
