@@ -1,6 +1,6 @@
 # Instead of assigning the variables in the inventory file for each hosts, the same variables can be defined here in the host_vars
 # directory. The name of each host goes as the name of the file in this directory.
----
+
 ansible_user: administrator
 ansible_password: Mer0*Chamkauchu
 ansible_port: 5896

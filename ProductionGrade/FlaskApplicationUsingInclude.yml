@@ -1,59 +1,11 @@
 ---
 - name: Deploying an application that uses FLASK
-  hosts: worker
+  hosts: ubuntuclients
   tasks:
-    - name: Checking to see if all the target servers are reachable
-      ping:
+    - include: tasks/connectivity_check.yml
 
-    - name: Install Dependencies
-      apt:
-        name: "{{ item }}"
-        state: installed
-      with_items:
-        - python
-        - python-setuptools
-        - python-dev
-        - build-essential
-        - python-pip
-        - python-mysqldb
+    - include: tasks/install_dependencies.yml
 
-    - name: Install MySQL Database
-      apt:
-        name: "{{ item }}"
-        state: installed
-      with_items:
-        - mysql-server
-        - mysql-client
+    - include: tasks/deploy_db.yml
 
-    - name: Start MySQL Service
-      service:
-        name: mysql
-        state: started
-        enabled: yes
-
-    - name: Create Application Database
-      mysql_db:
-        name: employee_db
-        state: present
-
-    - name: Create Application DB User
-      mysql_user:
-        name: db_user
-        password: Passw0rd
-        priv: "*.*:ALL"
-        state: present
-
-    - name: Install Python Flask Dependencies
-      pip:
-        name: "{{ item }}"
-      with_items:
-        - flask
-        - flask-mysql
-
-    - name: Copy web server source code
-      copy:
-        src: /root/MasteringAnsible/app.py
-        dest: /opt/app.py
-
-    - name: Starting the Web Server
-      shell: FLASK_APP=/opt/app.py nohup flask run --host=0.0.0.0 &
+    - include: tasks/deploy_web.yml
