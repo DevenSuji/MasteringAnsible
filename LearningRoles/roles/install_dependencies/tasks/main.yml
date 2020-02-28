@@ -1,2 +1,13 @@
 ---
 # tasks file for install_dependencies
+- name: Installing the Dependencies.. Hold on BABY....
+  apt:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - python
+    - python-setuptools
+    - python-dev
+    - build-essential
+    - python-pip
+    - python-mysqldb
