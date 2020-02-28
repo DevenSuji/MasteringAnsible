@@ -1,0 +1,8 @@
+# Simple application of jinja2 templating
+- name: Test template playbook
+  hosts: localhost
+  vars:
+    my_name: Deven Suji
+  tasks:
+    - debug:
+        msg: "My name is {{ my_name }}"

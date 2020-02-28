@@ -1,0 +1,21 @@
+---
+- name: Deploying Web Application on many servers
+  hosts: server1, server2, server3
+  any_errors_fatal: true
+  tasks:
+    - name: Install dependencies
+      ... <Some Code Here> ...
+    - name: Install mysql
+      ... <Some Code Here> ...
+    - name: Start mysql
+      ... <Some Code Here> ...
+    - name: Install Python Flask
+      ... <Some Code Here> ...
+    - name: Run web services
+      ... <Some Code Here> ...
+
+# When running a play agains multiple servers, if there is a failure on any server, by default ansible will remove those servers
+# from the list and continue with the play on other servers where the error was not encountered.
+# Ansible will simply skip running the tasks on the server where the error was encountered.
+# In order to stop the execution of play on all servers if there is and error on any of the server then
+# any_error_fatal: true directive is used.

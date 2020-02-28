@@ -1,0 +1,69 @@
+# When a task is executed the ssh session is held until the task is completed. This results in waste of time.
+# Inorder to ensure multiple tasks run at the same time Async and Poll is used
+
+# Ansible Playbook
+- name: Deploy Web Application
+  hosts: ubuntuclients
+  tasks:
+    - name: Run the web health check script
+      command: /opt.monitor_webapp.py
+      async: 360 # This is the maximum time we expect this task would take to execute.
+      poll: 60 # By default Ansible checks if the task execution completed or not every 10 seconds. If this polling time is not the appropriate then change the value to something else.
+
+      # poll value is the time is seconds that you want ansible to check if the task is completed or not each time. Here in this example if the task has not completed after 60 seconds then
+      # it will wait for another 60 seconds and check again.
+    # In the below added second task, it will run only once the above mentioned task is completed.
+    # Asynchronous does not mean that ansible will run the task and move ahead with another task even when the first task is not completed.
+    # This means that the below mentioned task will only run when the above mentioned task completed successfully.
+    - name: Run the db health check script
+      command: /opt.monitor_db.py
+      async: 360
+      poll: 60
+
+# BUT THIS BEHAVIOUR OF ANSIBLE CAN BE CHANGED BY USING THE POLL VALUE AS 0.
+# BOTH THE ABOVE MENTIONED TASKS CAN BE RUN AT THE SAME TIME BY SETTING THE POLL VALUE AS 0.
+
+- name: Deploy Web Application
+  hosts: ubuntuclients
+  tasks:
+    - name: Run the web health check script
+      command: /opt.monitor_webapp.py
+      async: 360
+      poll: 0
+
+    - name: Run the db health check script
+      command: /opt.monitor_db.py
+      async: 360
+      poll: 0
+
+# However after completing the second task ansible will just exit. We need to capture the output so that we could know if the task
+# completed or not. Check the below example on how to do it.
+# Steps to achieve it.
+# 1. Register the result of the tasks to a variable.
+
+- name: Deploy Web Application
+  hosts: ubuntuclients
+  tasks:
+    - name: Run the web health check script
+      command: /opt.monitor_webapp.py
+      async: 360
+      poll: 0
+      register: webapp_result
+
+    - name: Run the db health check script
+      command: /opt.monitor_db.py
+      async: 360
+      poll: 0
+      register: database_result
+
+    - name: Checking the status of the web tasks
+      async_status: jid={{ webapp_result.ansible_job_id }}
+      register: webjob_result
+      until: webjob_result.finished
+      retries: 30
+
+    - name: Checking the status of the dbtasks
+      async_status: jid={{ database_result.ansible_job_id }}
+      register: dbjob_result
+      until: dbjob_result.finished
+      retries: 30
