@@ -1,0 +1,26 @@
+[web]
+ansibletower ansible_host=192.168.0.130
+
+[dns]
+client3
+
+[database]
+client4
+
+[front:children]
+web
+
+[backend:children]
+dns
+database
+
+[web:vars]
+http_port=88
+proxy_timeout=5
+
+[backend:vars]
+ansible_port=314
+
+[all:vars]
+ansible_ssh_user=devensuji
+

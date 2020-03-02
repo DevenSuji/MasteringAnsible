@@ -95,3 +95,20 @@
       roles:
         - nginx
 
+*************************************************************************************************************************
+
+ANSIBLE ORDER OF OPERATION
+
+Within a play, there are a few more operations. While a playbook is strictly ordered from top to bottom, 
+a play has a more nuanced order of operations. Here is a list of the possible operations and the order 
+in which they will happen:
+
+1.  Variable loading
+2.  Fact gathering
+3.  The pre_tasks execution
+4.  Handlers notified from the pre_tasks execution
+5.  Roles execution
+6.  Tasks execution
+7.  Handlers notified from roles or tasks execution
+8.  The post_tasks execution
+9.  Handlers notified from the post_tasks execution
