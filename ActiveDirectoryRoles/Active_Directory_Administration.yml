@@ -4,12 +4,14 @@
   tasks:
     - name: Create Active Directory OU
       win_dsc:
-        resource_name: ADOrganizationalUnit
+        resource_name: ADOrganizationalUnit_CreateADOU_Config
         name: Servers
         path: "DC=Sikkim,DC=Com"
         ensure: present
         ProtectedFromAccidentalDeletion: True
         Description: "This OU is only for servers"
+        PsDscRunAsCredential_username: '{{ ansible_user }}'
+        PsDscRunAsCredential_password: '{{ ansible_ssh_pass }}'
   # roles:
   #   - Create_ActiveDirectory_OU
 

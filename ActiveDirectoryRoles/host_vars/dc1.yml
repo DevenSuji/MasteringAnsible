@@ -1,6 +1,4 @@
 ---
-ansible_user: devensuji@SIKKIM.COM
-ansible_ssh_pass: Mer0*Chamkauchu
 ansible_connection: ssh
 ansible_shell_type: powershell
 
