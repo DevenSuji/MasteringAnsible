@@ -4,13 +4,29 @@
   tasks:
     - name: Creating the Computer Object
       win_domain_computer:
-        name: "{{ ComputerName }}"
-        state: absent
-      register: Computer_Account_Deletion
+        name: mangan.sikkim.com
+        sam_account_name: mangan$
+        dns_hostname: mangan.sikkim.com
+        ou: "OU=Servers,DC=Sikkim,DC=Com"
+        description: Deven's Personal Lab
+        enabled: yes
+        state: present
+      register: Computer_Account_Creation
+      #delegate_to: my_windows_bridge.my_org.local
 
     - name: What is the Output???
       debug:
-        msg: Computer_Account_Deletion.stdout
+        msg: Computer_Account_Creation.stdout
+
+    # - name: 
+    #   win_domain_computer:
+    #     name: "{{ ComputerName }}"
+    #     state: absent
+    #   register: Computer_Account_Deletion
+
+    # - name: What is the Output???
+    #   debug:
+    #     msg: Computer_Account_Deletion.stdout
 
 
   #   - name: Create Active Directory OU
