@@ -1,0 +1,10 @@
+[ubuntutower]
+ansibletower
+
+[ubuntuclients]
+client3
+client4
+
+
+[domaincontroller]
+dc1
