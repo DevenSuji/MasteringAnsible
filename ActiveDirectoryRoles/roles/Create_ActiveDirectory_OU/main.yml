@@ -1,3 +1,4 @@
+---
 - name: Create Active Directory OU
   win_dsc:
     resource_name: ADOrganizationalUnit
