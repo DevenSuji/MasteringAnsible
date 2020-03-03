@@ -1,5 +1,5 @@
 ---
-- name: Install ACTIVE DIRECTORY DSC resource
+- name: Running ACTIVE DIRECTORY DSC resource
   hosts: dc1
   roles:
     #- Install_xActiveDirectory_DSC_Module

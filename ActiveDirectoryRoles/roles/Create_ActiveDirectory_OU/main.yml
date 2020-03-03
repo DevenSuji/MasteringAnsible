@@ -1,4 +1,4 @@
-- name: Create Active Directory
+- name: Create Active Directory OU
   win_dsc:
     resource_name: ADOrganizationalUnit
     name: Servers
