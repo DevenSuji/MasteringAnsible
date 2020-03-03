@@ -1,5 +1,5 @@
 ---
-- name: Install xWebAdministration DSC resource
+- name: Install xActiveDirectory DSC resource
   win_psmodule:
     name: xActiveDirectory
     state: present

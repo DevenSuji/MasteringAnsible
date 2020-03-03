@@ -2,8 +2,8 @@
 - name: Install ACTIVE DIRECTORY DSC resource
   hosts: dc1
   roles:
-    - Install_xActiveDirectory_DSC_Module
-    # - Create_ActiveDirectory_OU
+    #- Install_xActiveDirectory_DSC_Module
+    - Create_ActiveDirectory_OU
     # - Create_ActiveDirectory_Computer_Object
     # - Create_ActiveDirectory_User_Object
 

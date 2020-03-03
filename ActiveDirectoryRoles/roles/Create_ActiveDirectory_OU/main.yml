@@ -1,0 +1,8 @@
+- name: Create Active Directory
+  win_dsc:
+    resource_name: ADOrganizationalUnit
+    name: Servers
+    path: "DC=Sikkim,DC=Com"
+    ensure: present
+    ProtectedFromAccidentalDeletion: True
+    Description: "This OU is only for servers"
