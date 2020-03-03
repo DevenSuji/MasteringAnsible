@@ -1,0 +1,7 @@
+---
+- name: Testing something
+  hosts: ubuntuclients
+  tasks:
+          - name: Let's check the connectivity
+            ping:
+

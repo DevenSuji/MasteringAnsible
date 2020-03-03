@@ -1,15 +1,3 @@
-#[client]
-#client1
-#client2
-
-#[master]
-#tower
-
-#[linux]
-#tower
-#client1
-#client2
-
 [ubuntutower]
 ansibletower
 
@@ -17,12 +5,19 @@ ansibletower
 client3
 client4
 
-#[win]
-#dc1
 
-#[vars:win]
-#ansible_user=Ansible
-#ansible_password=Mer0*Chamkauchu
-#ansible_connection=winrm
+[domaincontroller]
+dc1 
+
+[domaincontroller:vars]
+#ansible_winrm_realm=SIKKIM.COM
+ansible_user=devensuji@SIKKIM.COM
+ansible_ssh_pass=Mer0*Chamkauchu
+#ansible_port=5896
+ansible_connection=ssh
+ansible_shell_type=powershell
 #ansible_winrm_server_cert_validation=ignore
-
+#ansible_winrm_transport=kerberos
+#ansible_winrm_scheme=https
+#ansible_winrm_kerberos_delegation=true
+#ansible_python_interpreter=/usr/bin/python2
