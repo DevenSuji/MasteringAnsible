@@ -1,0 +1,13 @@
+---
+- name: Creating ACTIVE DIRECTORY Computer Object
+  hosts: dc1
+  tasks:
+    - name:
+      win_domain_computer:
+        name: mangan
+        state: absent
+      register: Computer_Account_Deletion
+
+    - name: What is the Output???
+      debug:
+        msg: Computer_Account_Deletion.stdout
