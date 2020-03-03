@@ -1,17 +1,28 @@
 ---
-- name: Running ACTIVE DIRECTORY DSC resource
+- name: Creating ACTIVE DIRECTORY Computer Object
   hosts: dc1
   tasks:
-    - name: Create Active Directory OU
-      win_dsc:
-        resource_name: ADOrganizationalUnit_CreateADOU_Config
-        name: Servers
-        path: "DC=Sikkim,DC=Com"
-        ensure: present
-        ProtectedFromAccidentalDeletion: True
-        Description: "This OU is only for servers"
-        PsDscRunAsCredential_username: '{{ ansible_user }}'
-        PsDscRunAsCredential_password: '{{ ansible_ssh_pass }}'
+    - name: Creating the Computer Object
+      win_domain_computer:
+        name: "{{ ComputerName }}"
+        state: absent
+      register: Computer_Account_Deletion
+
+    - name: What is the Output???
+      debug:
+        msg: Computer_Account_Deletion.stdout
+
+
+  #   - name: Create Active Directory OU
+  #     win_dsc:
+  #       resource_name: ADOrganizationalUnit_CreateADOU_Config
+  #       name: Servers
+  #       path: "DC=Sikkim,DC=Com"
+  #       ensure: present
+  #       ProtectedFromAccidentalDeletion: True
+  #       Description: "This OU is only for servers"
+  #       PsDscRunAsCredential_username: '{{ ansible_user }}'
+  #       PsDscRunAsCredential_password: '{{ ansible_ssh_pass }}'
   # roles:
   #   - Create_ActiveDirectory_OU
 
