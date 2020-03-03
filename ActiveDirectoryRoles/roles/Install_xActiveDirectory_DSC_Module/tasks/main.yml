@@ -1,6 +1,5 @@
 ---
 - name: Install xWebAdministration DSC resource
-  hosts: dc1
   win_psmodule:
     name: xActiveDirectory
     state: present
