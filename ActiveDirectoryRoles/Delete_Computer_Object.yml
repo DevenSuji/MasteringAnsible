@@ -2,10 +2,17 @@
 - name: Creating ACTIVE DIRECTORY Computer Object
   hosts: dc1
   tasks:
-    - name:
+    - name: Deleting the Computer object
       win_domain_computer:
-        name: mangan
+        name: "{{ item }}"
         state: absent
+      with_items:
+        - mangan
+        - namchi
+        - gangtok
+        - ranipool
+        - pakkim
+        - jorethang
       register: Computer_Account_Deletion
 
     - name: What is the Output???

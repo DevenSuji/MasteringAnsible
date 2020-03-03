@@ -4,13 +4,20 @@
   tasks:
     - name: Creating the Computer Object
       win_domain_computer:
-        name: mangan.sikkim.com
-        sam_account_name: mangan$
-        dns_hostname: mangan.sikkim.com
+        name: "{{ item }}"
+        sam_account_name: "{{ item}}$"
+        dns_hostname: "{{ item }}.sikkim.com"
         ou: "OU=Servers,DC=Sikkim,DC=Com"
-        description: Deven's Personal Lab
+        description: Critical Servers
         enabled: yes
         state: present
+      with_items:
+        - mangan
+        - namchi
+        - gangtok
+        - ranipool
+        - pakkim
+        - jorethang
       register: Computer_Account_Creation
       #delegate_to: my_windows_bridge.my_org.local
 
