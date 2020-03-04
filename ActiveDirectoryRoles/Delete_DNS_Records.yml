@@ -11,23 +11,23 @@
       # delegate_to: tpawinignp017
       register: A_Record_Deletion
 
-    - name: Deleting Pointer Record
-      win_dns_record:
-        name: "{{ prod_ip | ipaddr('revdns') }}"
-        type: "PTR"
-        state: absent
-        zone: "{{ item }}"
-      # delegate_to: tpawinignp017
-      with_item:
-        - "{{ prod_ip | ipaddr('revdns').split('.', 1) }}"
-        - "{{ prod_ip | ipaddr('revdns').split('.', 2) }}"
-        - "{{ prod_ip | ipaddr('revdns').split('.', 3) }}"
-      register: Pointer_Record_Deletion
+    # - name: Deleting Pointer Record
+    #   win_dns_record:
+    #     name: "{{ prod_ip | ipaddr('revdns') }}"
+    #     type: "PTR"
+    #     state: absent
+    #     zone: "{{ item }}"
+    #   # delegate_to: tpawinignp017
+    #   with_item:
+    #     - "{{ prod_ip | ipaddr('revdns').split('.', 1) }}"
+    #     - "{{ prod_ip | ipaddr('revdns').split('.', 2) }}"
+    #     - "{{ prod_ip | ipaddr('revdns').split('.', 3) }}"
+    #   register: Pointer_Record_Deletion
 
-    - name: Querying for CNAME or Alias Record
-      debug:
-        msg: "{{ lookup('dig', 'server_name.enterprisenet.org', 'qtype=CNAME') }}"
-      register: CNAME_Record
+    # - name: Querying for CNAME or Alias Record
+    #   debug:
+    #     msg: "{{ lookup('dig', 'server_name.enterprisenet.org', 'qtype=CNAME') }}"
+    #   register: CNAME_Record
 
     # - name: Capturing the Alias Record
     #   set_fact:
