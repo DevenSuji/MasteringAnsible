@@ -1,6 +1,9 @@
 ---
 - name: This playbook Deletes Host A, Pointer and CName Records
   hosts: dc1
+  vars:
+    cname_record: "{{ lookup('dig', 'server_name.enterprisenet.org', 'qtype=CNAME') }}"
+  gather_facts: no
   tasks:
     - name: Deleting Host A Record
       win_dns_record:
@@ -24,16 +27,13 @@
     #     - "{{ prod_ip | ipaddr('revdns').split('.', 3) }}"
     #   register: Pointer_Record_Deletion
 
-    - name: Querying for CNAME or Alias Record
+    - name: Checking if the Alias Record Exists
       debug:
-        msg: "{{ lookup('dig', 'server_name.enterprisenet.org', 'qtype=CNAME') }}"
-      register: CNAME_Record
-
+        msg: "CNAME Record is {{ cname_record }}"
     # - name: Capturing the Alias Record
     #   set_fact:
     #     execution_output: "{{ CNAME_Record.stdout_lines[-1] }}"
     #   when: win_output is changed
-
     # - name: Removing CNAME or Alias Record
     #   win_dns_record:
     #     name: "{{ CNAME_Record }}"
