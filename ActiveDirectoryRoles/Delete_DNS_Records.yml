@@ -24,10 +24,10 @@
     #     - "{{ prod_ip | ipaddr('revdns').split('.', 3) }}"
     #   register: Pointer_Record_Deletion
 
-    # - name: Querying for CNAME or Alias Record
-    #   debug:
-    #     msg: "{{ lookup('dig', 'server_name.enterprisenet.org', 'qtype=CNAME') }}"
-    #   register: CNAME_Record
+    - name: Querying for CNAME or Alias Record
+      debug:
+        msg: "{{ lookup('dig', 'server_name.enterprisenet.org', 'qtype=CNAME') }}"
+      register: CNAME_Record
 
     # - name: Capturing the Alias Record
     #   set_fact:
