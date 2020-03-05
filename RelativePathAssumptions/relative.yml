@@ -1,0 +1,19 @@
+---
+- name: relative path play
+  hosts: localhost
+  gather_facts: false
+
+  vars_files:
+    - a_vars_file.yml
+
+  tasks:
+    - name: who am I
+      debug:
+        msg: "I am mastery task"
+    
+    - name: var from file
+      debug:
+        var: something
+
+    - include: tasks/a.yml
+    
