@@ -19,3 +19,43 @@ Complete Lab Guide on gitter.io: https://schoolofdevops.github.io/ultimate-ansib
 
 Note: we have deprecated all codespaces related sites e.g. codespaces.io,  codespaces.schoolofdevops.net. 
 You should use https://codespaces-io.github.io/codespaces/Codespaces Guide on Github.io instead for all references.
+
+
+ANSIBLE REPO
+
+|
+|-- Environments
+|       |-- Dev
+|       |-- Prod
+|
+|-- Group_Vars
+|       |-- Prod
+|       |-- Dev
+|       |-- All
+|
+|-- Roles
+|     |-- php
+|     |-- Apache
+|     |-- mysql
+|     |-- haproxy
+|     |-- systems
+|
+|-- Site.yml
+|-- app.yml >>> Pulled by Site.yml
+|-- db.yml  >>> Pulled by Site.yml
+|-- lb.yml  >>> Pulled by Site.yml
+|-- systems.yml
+|-- update.yml
+|-- ansible.cfg
+
+ANSIBLE.CFG FILE PRECENDENCE LEVEL
+
+        Priority 1    | Command Line Flags
+                      |
+        Priority 2    | ANSIBLE_CONFIG
+                      |
+        Priority 3    | ./ansible.cfg
+                      |
+        Priority 4    | ~/.ansible.cfg
+                      |
+        Priority 5    | /etc/ansible/ansible.cfg
