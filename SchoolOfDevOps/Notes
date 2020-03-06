@@ -1,0 +1,21 @@
+
+Following are some resources which you would need to refer during this course. Keep them handy.
+
+
+
+Codespaces Guide: https://codespaces-io.github.io/codespaces/   
+
+Codespaces GitHub Repo :  https://github.com/codespaces-io/codespaces
+
+All Ansible related slides:  Slides.com link to School of Devops slides for Ansible
+
+Gitter Channel : https://gitter.im/schoolofdevops/ansible
+
+Supporting Code : https://github.com/schoolofdevops/ansible-bootcamp-code
+
+Complete Lab Guide on gitter.io: https://schoolofdevops.github.io/ultimate-ansible-bootcamp/
+
+
+
+Note: we have deprecated all codespaces related sites e.g. codespaces.io,  codespaces.schoolofdevops.net. 
+You should use https://codespaces-io.github.io/codespaces/Codespaces Guide on Github.io instead for all references.
