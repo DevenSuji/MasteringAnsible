@@ -2,6 +2,7 @@
 - name: relative path play
   hosts: localhost
   gather_facts: false
+  no_log: True
 
   vars_files:
     - a_vars_file.yml
