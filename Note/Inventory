@@ -1,0 +1,54 @@
+EXAMPLE OF INVENTORY
+
+[local]
+localhost ansible_connection=local
+
+[app]
+app1
+app2
+
+[lb]
+lb
+
+[db]
+db
+
+[prod:children]
+app
+lb
+db
+
+In the above inventory file, prod group is a group of groups defined with the help of children tag.
+
+LIMITING
+
+ansible app1:app2:db:lb:localhost -m ping -o # Here the inventory is defined in ansible.cfg file. ansible.cfg file is placed on the same level of directory from 
+where we are running this adhoc command.
+
+ansible all -m ping --limit lb # Here we are asking the command to run only on the node lb.
+
+EXCLUSION
+
+ansible 'prod:!lb' -m ping
+
+In the above command though lb is part of prod group, however ansible will not execute the command against lb as it is exculded.
+
+ansible 'prod:!lb:!db' -m ping # Example of multiple exclusion.
+
+ansible 'prod[0:2]' -m ping # This methog will execute command on the first three hosts.
+
+ansible 'prod[2:]' -m ping # This methog will execute command only after the first two hosts in the inventory
+
+ansible '~(app|db).*' -m ping # Using regular expression to execute commands only on hosts that have the group name app and db
+
+ansible '~(app|db).*' -m ping -f 1 # -f is fork. This will execute commands against the number of forks mentioned. Here the command will run one at a time.
+
+
+USEFUL ADHOC COMMANDS
+
+ansible all -a "uptime"
+ansible all -a "hostname"
+ansible all -a "free"
+ansible all -a "free -m"
+ansible all -b -a "yum install -y vim" # -b here is become. User will become root here. -a is the argument or the raw command that we want to run on the end node.
+ansible all -b -a "useradd apple"

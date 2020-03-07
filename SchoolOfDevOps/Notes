@@ -1,8 +1,6 @@
 
 Following are some resources which you would need to refer during this course. Keep them handy.
 
-
-
 Codespaces Guide: https://codespaces-io.github.io/codespaces/   
 
 Codespaces GitHub Repo :  https://github.com/codespaces-io/codespaces
@@ -15,8 +13,6 @@ Supporting Code : https://github.com/schoolofdevops/ansible-bootcamp-code
 
 Complete Lab Guide on gitter.io: https://schoolofdevops.github.io/ultimate-ansible-bootcamp/
 
-
-
 Note: we have deprecated all codespaces related sites e.g. codespaces.io,  codespaces.schoolofdevops.net. 
 You should use https://codespaces-io.github.io/codespaces/Codespaces Guide on Github.io instead for all references.
 
@@ -25,8 +21,8 @@ ANSIBLE REPO
 
 |
 |-- Environments
-|       |-- Dev
-|       |-- Prod
+|       |-- Dev (Inventory)
+|       |-- Prod (Inventory)
 |
 |-- Group_Vars
 |       |-- Prod
