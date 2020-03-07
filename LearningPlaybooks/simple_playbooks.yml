@@ -1,0 +1,22 @@
+---
+- name: App Server Configuration
+  hosts: app
+  become: true
+  become_user: admin
+  become_method: sudo
+  vars:
+    apache_port: 8080
+    max_connection: 4000
+    ntp_conf: /etc/ntp.conf
+
+  tasks:
+    - name: create app user
+      user:
+        name: app
+        state: present
+        uid: 5002
+
+    - name: Install Git
+      yum:
+        name: tree
+        state: present

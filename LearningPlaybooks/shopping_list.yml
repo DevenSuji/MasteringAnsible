@@ -1,0 +1,20 @@
+---
+- name: shopping list
+  type: vegetables
+  location: vegetables vendor outside the hardware shop.
+  priority: 1
+  items:
+    - onion:
+        size: mdeium
+        shape: round
+        color: red
+        qty: 1.5 kg
+    - methi:
+        height: less
+        leaves: green
+        qty: 1bundle
+    - potato:
+        size: medium
+        eyes: false
+        qty: 1 kg
+...

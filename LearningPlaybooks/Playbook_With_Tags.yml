@@ -1,0 +1,60 @@
+#ADDING TAGS INSIDE THE PLAYBOOKS
+#--------------------------------
+---
+- name: Base System Configuration
+  hosts: prod
+  become: true
+  tags:
+    - BaseConfig
+  tasks:
+    - name: Create Admin User
+      user:
+        name: admin
+        uid: 5001
+        state: present
+      tags:
+        - admin
+
+    - name: Remove user dojo
+      user:
+        name: dojo
+        state: absent
+      tags:
+        - dojo
+
+    - name: Install tree
+      yum:
+        name: tree
+        state: present
+      tags:
+        - tree
+
+    - name: Install ntp
+      yum:
+        name: ntp
+        state: present
+      tags:
+        - ntp
+
+    - name: Start NTP Service
+      service:
+        name: ntp
+        state: started
+        enabled: true
+      tags:
+        - NTPStatus
+
+- name: Configuring app servers only
+  hosts: app
+  become: true
+  gather_facts: false
+  tasks:
+    - name: Create the user deploy
+      user:
+        name: deploy
+        state: present
+
+    - name: Install git
+      package:
+        name: git
+        state: installed

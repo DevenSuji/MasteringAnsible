@@ -1,0 +1,32 @@
+---
+  - name: deploy static website 
+    hosts: lb
+    become: true
+    tasks: 
+    - name: Add nginx repo
+      yum_repository:
+        name: nginx
+        description: nginx YUM repo
+        file: nginx
+        baseurl: http://nginx.org/packages/centos/6/x86_64/
+        gpgcheck: no
+
+    - name: install nginx 
+      yum:
+        name: nginx 
+        state: installed 
+
+    - name: start nginx service 
+      service: 
+        name: nginx 
+        state: started
+
+    - name: install git 
+      yum:
+        name: git 
+        state: installed 
+
+    - name: deploy static app 
+      git:
+        repo: 'https://github.com/schoolofdevops/html-sample-app.git'
+        dest: /usr/share/nginx/html/app
