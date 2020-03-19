@@ -1,0 +1,37 @@
+Variables
+
+Variables are of two types:
+1. Vars.
+2. Facts
+    
+    
+Vars: These are User defined and takes the below mentioned forms.
+    a. Role Default Vars.
+    b. Inventory Vars: hostvars and groupvars.
+    c. Playbook Vars.
+    d. Role Vars
+    e. Extra Varsat the runtime (injected with the help of -e switch)
+
+Defining Vars                                       Accessing Vars
+-------------                                       --------------
+port                                                {{ port }}
+
+port1                                               {{ port1 }}
+
+mysql_port                                          {{ mysql_port }}
+
+mysql: #This is a dictionary                        {{ mysql[port] }}
+  port: 3306                                        {{ mysql.port }}
+  user: mysql
+  server: true  
+
+Variable Precedence
+-------------------
+
+1. -e switch                        # Highest Precedence
+2. Role Vars                                 |
+3. Playbook Vars                             |
+4. Host Vars                                 |
+5. Group Vars                                |
+6. Role Defaults                    # Lowest Precedence
+
