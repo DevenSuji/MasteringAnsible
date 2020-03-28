@@ -1,0 +1,10 @@
+---
+- name: This playbook installs VIM
+  hosts: ansibletower
+  gather_facts: false
+  tasks:
+    - name: Installing VIM
+      yum: 
+        name: vim
+        state: installed
+        

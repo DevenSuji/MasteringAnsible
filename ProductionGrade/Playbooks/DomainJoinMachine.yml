@@ -1,3 +1,4 @@
+---
 - name: Joining the machine to the Domain Sikkim.com
   hosts: winclient1
   gather_facts: no

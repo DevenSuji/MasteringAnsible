@@ -463,5 +463,9 @@ roles/
   |   |-- main.yml
   |-- templates
       |-- motd.j2
+***********************************************************************************************
+DRY RUN
+
+ansible-playbook -C playbook.yaml
 
       
