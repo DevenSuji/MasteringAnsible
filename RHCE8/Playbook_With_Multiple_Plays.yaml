@@ -1,0 +1,41 @@
+---
+- name: Enable WebServer
+  hosts: linuxclients
+  gather_facts: false
+  tasks:
+    - name: Install the httpd and firewall
+      yum: 
+        name: 
+          - httpd
+          - firewalld
+        state: latest
+    - name: Install Welcome Page
+      copy:
+        content: " Hi Liki"
+        dest: /var/www/html/index.html
+    - name: Starting the Web Server
+      service:
+        name: httpd
+        enabled: true
+        state: started
+    - name: start Firewall Services
+      service: 
+        name: firewalld
+        enabled: true
+        state: started
+    - name: Open firewall 
+      firewalld:
+        service: http
+        permanent: true
+        state: enabled
+        immediate: yes
+
+- name: Test webserver access
+  hosts: localhost
+  gather_facts: false
+  tasks:
+    - name: Testing the connection to the web server
+      uri:
+        url: http://client1.sikkim.com
+        return_content: yes
+        status_code: 200
