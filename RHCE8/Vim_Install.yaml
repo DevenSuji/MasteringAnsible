@@ -7,4 +7,13 @@
       yum: 
         name: vim
         state: installed
-        
+
+- name: Uninstalling VSFTPD
+  hosts: centos
+  gather_facts: false
+  tasks:
+    - name: Uninstalling few stuffs
+      yum: 
+        name: vsftpd
+        state: absent
+

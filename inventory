@@ -1,23 +1,33 @@
-[ubuntutower]
+[ansibletower]
+tower
+
+[linuxclients]
+client1
+client2
+
+[centos:children]
 ansibletower
+linuxclients
 
-[ubuntuclients]
-client3
-client4
+[dc]
+dc1
 
+[dc:vars]
+ansible_user=devensuji
+ansible_password=Mer0*Chamkauchu
+ansible_connection=winrm
+ansible_winrm_server_cert_validation=ignore
 
-[domaincontroller]
-dc1 
+[winclient]
+winclient1
 
-[domaincontroller:vars]
-#ansible_winrm_realm=SIKKIM.COM
-ansible_user=devensuji@SIKKIM.COM
-ansible_ssh_pass=Mer0*Chamkauchu
-#ansible_port=5896
-ansible_connection=ssh
-ansible_shell_type=powershell
-#ansible_winrm_server_cert_validation=ignore
-#ansible_winrm_transport=kerberos
-#ansible_winrm_scheme=https
-#ansible_winrm_kerberos_delegation=true
-#ansible_python_interpreter=/usr/bin/python2
+[winclient:vars]
+ansible_user=administrator
+ansible_password=Mer0*Chamkauchu
+ansible_connection=winrm
+ansible_winrm_server_cert_validation=ignore
+ansible_port=5985
+
+[win:children]
+dc
+winclient
