@@ -10,8 +10,9 @@
         state: disabled
         immediate: yes
     - name: Removing the Index File
-      path: /var/www/html/index.html
-      state: absent
+      file:
+        path: /var/www/html/index.html
+        state: absent
     - name: Remove package
       package:
         name: httpd
