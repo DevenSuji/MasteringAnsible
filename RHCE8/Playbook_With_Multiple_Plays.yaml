@@ -4,14 +4,14 @@
   gather_facts: false
   tasks:
     - name: Install the httpd and firewall
-      yum: 
-        name: 
+      yum:
+        name:
           - httpd
           - firewalld
         state: latest
     - name: Install Welcome Page
       copy:
-        content: " Hi Liki"
+        content: " Hi Likitha. I've always loved you and one fine day lets have SEX..."
         dest: /var/www/html/index.html
     - name: Starting the Web Server
       service:
@@ -19,11 +19,11 @@
         enabled: true
         state: started
     - name: start Firewall Services
-      service: 
+      service:
         name: firewalld
         enabled: true
         state: started
-    - name: Open firewall 
+    - name: Open firewall
       firewalld:
         service: http
         permanent: true
