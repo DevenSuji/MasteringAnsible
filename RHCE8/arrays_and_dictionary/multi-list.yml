@@ -11,4 +11,4 @@
 
     - name: Printing the second item in the Array
       debug:
-        msg: "The second item in the array is {{ users[1] }}"
+        msg: The second item in the array is {{ users[1] }}
