@@ -1,7 +1,7 @@
 ---
 - name: Printing the contents of List. List is also an Array
   hosts: client1
-  vars_file:
+  vars_files:
     - vars/users-list
   tasks:
     - name: Printing the Values
