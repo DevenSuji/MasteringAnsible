@@ -1,5 +1,5 @@
 ---
-- name: Printing the contents of List (List is also an Array)
+- name: Printing the contents of List. List is also an Array
   hosts: client1
   vars_file:
     - vars/users-list
