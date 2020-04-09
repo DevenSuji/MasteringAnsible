@@ -1,6 +1,6 @@
 ---
 - name: Upgrading Patches
-  hosts: client
+  hosts: centos
   tasks:
     - name: upgrade all packages
       yum:

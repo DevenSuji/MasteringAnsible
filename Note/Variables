@@ -1,5 +1,45 @@
 Variables
 
+Varaibles can be defined in following different places.
+1. Variables can be defined in the playbook. 
+   But this makes the playbook rigid and the playbook cannt be re-used for any other purpose.
+
+---
+- name: Example of defining vars in a playbook
+  hosts: all
+  vars:
+    web_package: httpd
+
+
+2. Variables can also be defined on the hosts.
+    a. By defining the variables in the inventory. Not a good method.
+    b. By using the include method.
+
+---
+- name: Defining the variable outside the playbook in a variable file and including it in the play
+  hosts: all
+  vars_files:
+    - vars/users.yaml
+
+
+
+    d. By using the local facts.
+
+Some details of the variables:
+1. After defining the variables, it can be used later in the playbook.
+2. Order of the variable does not matter.
+3. Variables can be refferd using this kind of notation {{ web_package }}
+4. In conditional statements, no curly braces are needed to refere to a variable values.
+    a. when: "'not found' in command_result.err"
+    b. {% if ansible_facts['devices']['sdb'] is defined %}
+                        OR
+       {% if ansible_facts.devices.sdb is defined %}
+
+       Secondary disk size: {{ ansible_facts['devices']['sdb']['size'] }}
+       Secondary disk size: {{ ansible_facts.devices.sdb.size }}
+5. If the variable is the first element, using quotes is mandatory.
+
+**************************************************************************************************************
 Variables are of two types:
 1. Vars.
 2. Facts
@@ -10,7 +50,7 @@ Vars: These are User defined and takes the below mentioned forms.
     b. Inventory Vars: hostvars and groupvars.
     c. Playbook Vars.
     d. Role Vars
-    e. Extra Varsat the runtime (injected with the help of -e switch)
+    e. Extra Vars at the runtime (injected with the help of -e switch)
 
 Defining Vars                                       Accessing Vars
 -------------                                       --------------
@@ -34,4 +74,19 @@ Variable Precedence
 4. Host Vars                                 |
 5. Group Vars                                |
 6. Role Defaults                    # Lowest Precedence
+**************************************************************************************************************
+
+Scopes of Variables:
+--------------------
+
+1. Global Scope:  This is when a variable is set from the inventory or the command line. It applies to the entire
+                  playbook that you are going to run.
+2. Play Scope:    This is applied when it is set from a play. It will only come into action for that specific play
+                  where the variable is defined.
+3. Host Scope:    This is applied when set in the inventory file ot using a host variable inclusion file.
+
+
+
+
+
 
