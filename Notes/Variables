@@ -1,6 +1,9 @@
 Variables
 
-Varaibles can be defined in following different places.
+   Varaibles can be defined in following different places.
+
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
 1. Variables can be defined in the playbook. 
    But this makes the playbook rigid and the playbook cannt be re-used for any other purpose.
 
@@ -10,6 +13,7 @@ Varaibles can be defined in following different places.
   vars:
     web_package: httpd
 
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 
 2. Variables can also be defined on the hosts.
     a. By defining the variables in the inventory. Not a good method.
@@ -21,23 +25,44 @@ Varaibles can be defined in following different places.
   vars_files:
     - vars/users.yaml
 
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 
+3. By using the local facts.
 
-    d. By using the local facts.
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 
-Some details of the variables:
+*** Some details of the variables:
+------------------------------
+
 1. After defining the variables, it can be used later in the playbook.
+
 2. Order of the variable does not matter.
+
 3. Variables can be refferd using this kind of notation {{ web_package }}
+
 4. In conditional statements, no curly braces are needed to refere to a variable values.
+
     a. when: "'not found' in command_result.err"
+
     b. {% if ansible_facts['devices']['sdb'] is defined %}
                         OR
        {% if ansible_facts.devices.sdb is defined %}
 
        Secondary disk size: {{ ansible_facts['devices']['sdb']['size'] }}
        Secondary disk size: {{ ansible_facts.devices.sdb.size }}
-5. If the variable is the first element, using quotes is mandatory.
+
+5. If the variable is the first element, using quotes is mandatory. Look at the example below
+
+---
+- name: Create a user using a variable
+  hosts: all
+  vars: 
+    user: lisa
+  tasks:
+    - name: Create a user {{ user }}
+      user:
+        name: "{{ user }}" ##### Since the variable is the first element double quotes is used here.
+        
 
 **************************************************************************************************************
 Variables are of two types:
