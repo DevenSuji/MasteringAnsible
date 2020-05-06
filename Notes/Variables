@@ -62,7 +62,7 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
     - name: Create a user {{ user }}
       user:
         name: "{{ user }}" ##### Since the variable is the first element double quotes is used here.
-        
+
 
 **************************************************************************************************************
 Variables are of two types:
@@ -90,6 +90,8 @@ mysql: #This is a dictionary                        {{ mysql[port] }}
   user: mysql
   server: true  
 
+**************************************************************************************************************
+
 Variable Precedence
 -------------------
 
@@ -99,6 +101,7 @@ Variable Precedence
 4. Host Vars                                 |
 5. Group Vars                                |
 6. Role Defaults                    # Lowest Precedence
+
 **************************************************************************************************************
 
 Scopes of Variables:
@@ -108,7 +111,7 @@ Scopes of Variables:
                   playbook that you are going to run.
 2. Play Scope:    This is applied when it is set from a play. It will only come into action for that specific play
                   where the variable is defined.
-3. Host Scope:    This is applied when set in the inventory file ot using a host variable inclusion file.
+3. Host Scope:    This is applied when set in the inventory file or using a host variable inclusion file.
 
 
 
