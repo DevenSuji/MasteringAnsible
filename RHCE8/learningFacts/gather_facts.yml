@@ -1,0 +1,13 @@
+---
+- name: Testing gathering facts
+  hosts: all
+  gather_facts: no
+  tasks: 
+    - name: Gathering facts
+      setup:
+        gather_subset:
+          - '!all'
+          - '!any'
+          - facter
+
+          

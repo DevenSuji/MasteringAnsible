@@ -1,0 +1,9 @@
+---
+- name: Printing the contents of Dictionary also known as hash
+  hosts: client1
+  vars_files:
+    - vars/users-dictionary
+  tasks:
+    - name: Printing the values
+      debug:
+        msg: "User {{users.laxmi.username}} has home directory {{users.laxmi.homedir}} and shell {{ users.laxmi.shell }}"

@@ -1,0 +1,27 @@
+---
+- name: Install Custom Facts
+  hosts: linuxclients
+  vars: 
+    remote_dir : /etc/ansible/facts.d
+    facts_file: localfacts.fact
+  tasks: 
+    - name: Create fact directory
+      file: 
+        state: directory
+        recurse: yes
+        path: "{{ remote_dir }}"
+    - name: Install New Facts
+      copy: 
+        src: "{{ facts_file }}"
+        dest: "{{ remote_dir }}"
+- name: Now Install the DAMN Shit and Start
+  hosts: linuxclients
+  tasks: 
+    - name: Install
+      yum: 
+        name: "{{ ansible_local.localfacts.localfacts.package }}"
+    - name: Starting the shit
+      service:
+        name: "{{ ansible_local.localfacts.localfacts.service }}"
+        state: started
+

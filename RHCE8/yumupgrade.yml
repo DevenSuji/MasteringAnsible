@@ -1,0 +1,12 @@
+---
+- name: Upgrading Patches
+  hosts: centos
+  tasks:
+    - name: upgrade all packages
+      yum:
+        name: "*"
+        state: latest
+    - name: Rebooting a machine and waiting for the same to come backup.
+      reboot:
+        reboot_timeout: 3600
+
