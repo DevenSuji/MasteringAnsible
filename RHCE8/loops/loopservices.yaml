@@ -1,0 +1,14 @@
+---
+- name: Start Some Services
+  hosts: linuxclients
+  gather_facts: no
+  vars:
+    my_services:
+      - crond
+      - sshd
+  tasks: 
+    - name: Looping and Starting the Sevices
+      service: 
+        name: "{{ item }}"
+        state: started
+      loop: "{{ my_services }}"

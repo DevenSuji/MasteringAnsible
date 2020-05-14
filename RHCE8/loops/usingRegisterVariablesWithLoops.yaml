@@ -1,0 +1,15 @@
+---
+- name: Demo of how register works
+  hosts: all
+  gather_facts: no
+  tasks: 
+    - name: Show loop register
+      shell: "echo {{ item }}"
+      loop:
+        - "one"
+        - "two"
+      register: echo
+    - name: Show the Registered Variable
+      debug:
+        var: echo.results.stdout
+

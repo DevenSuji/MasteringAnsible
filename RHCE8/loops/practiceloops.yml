@@ -1,0 +1,22 @@
+---
+- name: Practicing loops
+  hosts: ansibletower
+  gather_facts: no
+  vars:
+    family_member_names: 
+      - Basanth
+      - Ganga
+      - Laxmi
+      - Yogen
+      - Bhupen
+      - Pavithra
+      - Dhrishti
+      - Duganth
+      - Saru
+      - Buwari
+      - Aaru
+  tasks:
+    - name: Calling out the names of every family member
+      debug:
+        msg: "My Family member consists of {{ item }}"
+      loop: "{{ family_member_names }}"
