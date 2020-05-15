@@ -1,0 +1,28 @@
+---
+- name: Database server is running
+  hosts: linuxclients
+  vars:
+    database_packages:
+      - mariadb-server
+      - python3-PyMySQL
+  tasks:
+    - name: Installing the MariaDB Packages
+      yum: 
+        name: "{{ item }}"
+        state: present
+      loop: "{{ database_packages }}"
+      when: ( ansible_distribution == "RedHat" or ansible_distribution == "CentOS" ) and ansible_distribution_major_version == "7"
+    - name: Start the DB Service
+      service:
+        name: mariadb
+        state: started
+        enabled: true
+      notify:
+        - set db password
+   
+  handlers:
+    - name: set db password
+      mysql_user:
+        name: root
+        password: password
+    

@@ -1,0 +1,11 @@
+---
+- name: Demo of changed status
+  hosts: linuxclients
+  tasks: 
+    - name: Check Local Time
+      command: date
+      register: command_result
+      #changed_when: false
+    - name: Print Local Time
+      debug:
+        var: command_result.stdout
