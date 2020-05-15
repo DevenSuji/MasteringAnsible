@@ -1,0 +1,17 @@
+---
+- name: Using BLOCK, RESCUE AND ALWAYS
+  hosts: linuxclients
+  tasks:
+    - name: Wrapping everything in a block
+      block:
+        - name: Removing a file
+          shell:
+            cmd: /usr/bin/rm /var/www/html/index.html
+      rescue:
+        - name: Creating a file if Block fails to delete the index.html
+          shell:
+            cmd: /usr/bin/touch /tmp/rescuefile
+      always:
+        - name: No matter if the Block and Rescue is successfully. Always will run
+          shell:  
+            cmd: /usr/bin/logger "KEEP GOING DEVEN SUJI. THE JOURNEY IS LONG AND TIRING BUY YOU'LL MAKE IT WITH EASE..."

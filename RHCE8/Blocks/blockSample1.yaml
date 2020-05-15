@@ -1,7 +1,6 @@
 ---
 - name: Simple BLOCK Example
   hosts: linuxclients
-  gather_facts: no
   tasks:
     - name: Http Block
       block:
@@ -13,4 +12,4 @@
           service:
             name: httpd
             state: started
-      when: ansible_distribution == "RedHat"
+      when: ansible_distribution == "CentOS"

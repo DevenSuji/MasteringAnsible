@@ -16,7 +16,7 @@
     - name: Copy Nothing. Forcing a failure
       copy:
         src: /tmp/nothing.html
-        dest: / var/www/html/nothing.html
+        dest: /var/www/html/nothing.html
   handlers:
     - name: restart_web
       service:
