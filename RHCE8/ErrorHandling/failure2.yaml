@@ -1,0 +1,18 @@
+---
+- name: show the fail module
+  hosts: linuxclients
+  tasks:
+    - name: do something impossible
+      lvol:
+        lv: lvnothing
+        vg: vgnothing
+        size: 1G
+      register: command_result
+      ignore_errors: yes
+    - name: Show command_result error 
+      debug: 
+        var: command_result
+    - name: Print a Friendly Error
+      fail:
+        msg: DEVEN FUCKED LIKITHA LUSTFULLY
+      when: "'not found' in command_result.err"
