@@ -1,0 +1,9 @@
+# 1. A BLOCK is a logical group of tasks.
+# 2. It can be used to control how tasks are executed.
+# 3. One block can, for instance, be enabled using single when, and that means multiple tasks can be triggered using single when condition.
+# 4. Blocks can also be used in error condition handling.
+        # A. Use BLOCK to define the main task to run.
+        # B. Use RESCUE to define tasks that will run, if tasks defined in the block fail.
+        # C. Use ALWAYS  to define tasks that will run, regardless of the success or failure of the BLOCK and RESCUE tasks.
+# 5. NOTE: Items cannot be used in BLOCKS
+        
