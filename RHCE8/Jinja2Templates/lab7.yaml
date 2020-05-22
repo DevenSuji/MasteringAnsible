@@ -9,7 +9,7 @@
     - name: Start and enable vsftpd
       service:
         name: vsftpd
-        state: enabled
+        state: started
     - name: Open Port in Firewall
       firewalld:
         service: ftp
@@ -23,7 +23,7 @@
     local_enable: yes
     write_enable: yes
     anon_upload_enable: yes
-  tasks: 
+  tasks:
     - name: Using the template to copy the ftp config
       template:
         src: vsftpd.j2
@@ -39,10 +39,10 @@
     - name: set permissions
       file:
         path: /var/ftp/pub
-        mode: '0777'
+        mode: "0777"
     - name: set selinux boolean
       seboolean:
-        name: ftpd_anon_write_on
+        name: ftpd_anon_write
         state: yes
         persistent: yes
     - name: manage selinux settings
@@ -52,7 +52,6 @@
         state: present
       notify:
         - run restorecon
-    handlers:
-      - name: run restorecon
-        command: restorecon -vR /var/ftp/pub
-  
+  handlers:
+    - name: run restorecon
+      command: restorecon -vR /var/ftp/pub
