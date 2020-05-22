@@ -1,0 +1,12 @@
+127.0.0.1   localhost localhost.localdomain localhost4 localhost4.localdomain4
+::1         localhost localhost.localdomain localhost6 localhost6.localdomain6
+192.168.0.140 tower.sikkim.com tower
+192.168.0.141 client1.sikkim.com client1
+192.168.0.142 client2.sikkim.com client2
+192.168.0.130 master.sikkim.com master
+192.168.0.150 dc1.sikkim.com dc1
+192.168.0.151	winclient1.sikkim.com	winclient1
+# BEGIN ANSIBLE MANAGED BLOCK
+192.168.2.110 host1.example.com
+192.168.4.120 host2.example.com
+# END ANSIBLE MANAGED BLOCK

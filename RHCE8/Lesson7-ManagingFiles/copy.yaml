@@ -1,0 +1,27 @@
+---
+- name: File Copy Module
+  hosts: linuxclients
+  tasks:
+    - name: Copy File Demo
+      copy: 
+        src: /etc/hosts
+        dest: /tmp/
+    - name: Adding some lines to /tmp/hosts
+      blockinfile:
+        path: /tmp/hosts
+        block: |
+          192.168.2.110 host1.example.com
+          192.168.4.120 host2.example.com
+        state: present
+    - name: Verify file checksum
+      stat:
+        path: /tmp/hosts
+        checksum_algorithm: md5
+      register: result
+    - name: Debugging the result
+      debug:
+        msg: "The checksum of /tmp/hosts is {{ result.stat.checksum }}"
+    - name: fetch a file
+      fetch:
+        src: /tmp/hosts
+        dest: /tmp

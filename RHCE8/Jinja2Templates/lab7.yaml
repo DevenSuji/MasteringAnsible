@@ -1,0 +1,58 @@
+---
+- name: Install VSFTPD
+  hosts: linuxclients
+  tasks:
+    - name: Get the basic vsftpd operational
+      yum:
+        name: vsftpd
+        state: installed
+    - name: Start and enable vsftpd
+      service:
+        name: vsftpd
+        state: enabled
+    - name: Open Port in Firewall
+      firewalld:
+        service: ftp
+        permanent: yes
+        state: enabled
+
+- name: Configure vsftpd using jinja template
+  hosts: linuxclients
+  vars:
+    anonymous_enable: yes
+    local_enable: yes
+    write_enable: yes
+    anon_upload_enable: yes
+  tasks: 
+    - name: Using the template to copy the ftp config
+      template:
+        src: vsftpd.j2
+        dest: /etc/vsftpd/vsftpd.conf
+
+- name: configure vsftpd permissions and selinux
+  hosts: linuxclients
+  tasks:
+    - name: Install required selinux tools
+      yum:
+        name: policycoreutils-python.x86_64
+        state: present
+    - name: set permissions
+      file:
+        path: /var/ftp/pub
+        mode: '0777'
+    - name: set selinux boolean
+      seboolean:
+        name: ftpd_anon_write_on
+        state: yes
+        persistent: yes
+    - name: manage selinux settings
+      sefcontext:
+        target: /var/ftp/pub
+        setype: public_content_rw_t
+        state: present
+      notify:
+        - run restorecon
+    handlers:
+      - name: run restorecon
+        command: restorecon -vR /var/ftp/pub
+  
