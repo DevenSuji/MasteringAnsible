@@ -10,10 +10,12 @@
       service:
         name: vsftpd
         state: started
+        enabled: yes
     - name: Open Port in Firewall
       firewalld:
         service: ftp
         permanent: yes
+        immediate: yes
         state: enabled
 
 - name: Configure vsftpd using jinja template
