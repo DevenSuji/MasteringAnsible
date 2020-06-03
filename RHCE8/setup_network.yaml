@@ -1,0 +1,18 @@
+# SPDX-License-Identifier: BSD-3-Clause
+---
+- hosts: client2
+  vars:
+    network_connections:
+
+      # Create one ethernet profile and activate it.
+      # The profile uses automatic IP addressing
+      # and is tied to the interface by MAC address.
+      - name: happy1
+        state: up
+        type: ethernet
+        autoconnect: yes
+        mac: 08:00:27:51:44:6D
+        mtu: 1450
+
+  roles:
+    - rhel-system-roles.network
