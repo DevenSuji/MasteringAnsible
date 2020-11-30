@@ -1,0 +1,15 @@
+---
+- name: Copying the script that installs Google Chrome
+  win_copy:
+    src: Install-GoogleChrome.ps1
+    dest: 'C:\temp\'
+  delegate_to: "{{ Jump_Server_Defined_In_Main_Vars }}"
+
+- name: Executing the Script MSOfficeInstallation.ps1...
+  win_command: "powershell.exe -ExecutionPolicy ByPass -File C:/temp/Install-GoogleChrome.ps1 --ComputerName {{ ComputerName }}"
+  delegate_to: "{{ Jump_Server_Defined_In_Main_Vars }}"
+  register: Chrome_Installation_Status
+
+- name: Hey what happened?
+  debug:
+    msg: "{{ Chrome_Installation_Status.stdout }}"
