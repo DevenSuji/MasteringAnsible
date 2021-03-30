@@ -1,8 +1,0 @@
----
-- name: Gathering the IP as fact
-  hosts: all
-  tasks: 
-    - name: Showing the IP Address
-      debug:
-        msg: >
-          This host uses IP address {{ ansible_facts.default_ipv4.address | trim }}

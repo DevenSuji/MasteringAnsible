@@ -1,7 +1,0 @@
-1. Managing the changed status may be important as handlers triggers as per the changed status.
-2. The result of the command can be registered, and the registered variable can be scanned for specific text to determine that a change has occured.
-3. This allows ansible to report a changed stauts, where it normally would not, thus allowing handlers to be triggered.
-4. Using changed_when is helpful in two cases:
-	--->>> To allow handlers to run when a change is not reported by a task.
-	--->>> To To disable commands that run successful to report a changed status.
- 

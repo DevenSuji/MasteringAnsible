@@ -1,7 +1,0 @@
----
-# 1. In Jinja2 templates, control structures can be used to organize the template in an optimal way.
-#
-# 2 . The for statement can be used to iterate through a variable and use all values in the variable.
-#
-# 3. The if statement can be used to have the template work with a variable if another variable is defined.
-#
