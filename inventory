@@ -1,5 +1,5 @@
 [ansibletower]
 tower
 
-[linuxclients]
+[clients]
 client1
