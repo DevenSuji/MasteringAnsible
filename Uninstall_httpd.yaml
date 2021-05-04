@@ -2,16 +2,16 @@
 - name: Uninstalling HTTPD
   hosts: clients
   tasks:
-    - name: Uninstalling the HTTPD Package
-      package:
-        name: httpd
-        state: absent
-    - name: Removing the Index File
-      ansible.builtin.file:
-        path: /var/www/html/index.html
-        state: absent
-    - name: Opening the holes on the firewall
+    - name: Closing the http Port on the firewall
       firewalld:
         service: http
         permanent: yes
         state: disabled
+    - name: Removing the Index File
+      ansible.builtin.file:
+        path: /var/www/html/index.html
+        state: absent
+    - name: Uninstalling the HTTPD Package
+      package:
+        name: httpd
+        state: absent
