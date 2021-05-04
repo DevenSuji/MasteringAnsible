@@ -8,7 +8,7 @@
       state: installed
   - name: Enabling the VSFTPD Service
     service:
-      name: vsftpd.service
+      name: vsftpd
       enabled: true
   - name: Inserting a README File
     copy:
