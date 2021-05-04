@@ -3,7 +3,7 @@
   hosts: all
   vars_files:
     - secret.yaml
-  task:
+  tasks:
     - name: Creating the user now
       user:
         name: "{{ username }}"
