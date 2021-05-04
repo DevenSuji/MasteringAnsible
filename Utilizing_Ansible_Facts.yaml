@@ -1,0 +1,8 @@
+---
+- name: Print IP Facts
+  hosts: all
+  tasks:
+    - name: Printing the Facts
+      debug:
+        msg: >
+          "{{ansible_facts.default_ipv4.address}}" belongs to {{ ansible_facts.nodename}}
