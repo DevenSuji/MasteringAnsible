@@ -1,11 +1,12 @@
-Variables
+# Variables
 
-   Varaibles can be defined in following different places.
+Varaibles can be defined in following different places.
 
-$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+________________________________________________________________________________________
 
 1. Variables can be defined in the playbook. 
-   But this makes the playbook rigid and the playbook cannt be re-used for any other purpose.
+   
+But this makes the playbook rigid and the playbook cannt be re-used for any other purpose.
 
 ---
 - name: Example of defining vars in a playbook
@@ -13,11 +14,12 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
   vars:
     web_package: httpd
 
-$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+________________________________________________________________________________________
 
 2. Variables can also be defined on the hosts.
-    a. By defining the variables in the inventory. Not a good method.
-    b. By using the include method.
+
+a. By defining the variables in the inventory. Not a good method.
+b. By using the include method.
 
 ---
 - name: Defining the variable outside the playbook in a variable file and including it in the play
@@ -25,11 +27,11 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
   vars_files:
     - vars/users.yaml
 
-$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+________________________________________________________________________________________
 
 3. By using the local facts.
 
-$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+________________________________________________________________________________________
 
 *** Some details of the variables:
 ------------------------------
@@ -64,7 +66,7 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
         name: "{{ user }}" ##### Since the variable is the first element double quotes is used here.
 
 
-**************************************************************************************************************
+________________________________________________________________________________________
 Variables are of two types:
 1. Vars.
 2. Facts
@@ -90,19 +92,19 @@ mysql: #This is a dictionary                        {{ mysql[port] }}
   user: mysql
   server: true  
 
-**************************************************************************************************************
+________________________________________________________________________________________
 
 Variable Precedence
 -------------------
 
-1. -e switch                        # Highest Precedence
+1. -e key=value                        # Highest Precedence
 2. Role Vars                                 |
 3. Playbook Vars                             |
 4. Host Vars                                 |
 5. Group Vars                                |
 6. Role Defaults                    # Lowest Precedence
 
-**************************************************************************************************************
+________________________________________________________________________________________
 
 Scopes of Variables:
 --------------------
