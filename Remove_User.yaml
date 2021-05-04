@@ -1,5 +1,5 @@
 ---
-- name: Uninstalling HTTPD
+- name: Removing Users
   hosts: all
   tasks:
   - name: Removing user {{ item }}
