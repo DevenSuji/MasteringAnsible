@@ -1,0 +1,13 @@
+---
+- name: Deploying VSFTPD
+  hosts: clients
+  tasks:
+  - name: Removing the README File
+    ansible.builtin.file:
+      path: /var/ftp/pub/README
+      state: absent
+  - name: Removing the VSFTPD Package
+    yum:
+      name: vsftpd
+      state: absent
+...
