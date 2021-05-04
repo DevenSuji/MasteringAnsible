@@ -1,0 +1,12 @@
+---
+- name: Uninstalling HTTPD
+  hosts: all
+  tasks:
+  - name: Removing user {{ item }}
+    user: 
+      name: "{{ item }}"
+      state: absent
+      remove: yes
+    loop:
+      - duganthsuji
+      - dhrishtisuji
