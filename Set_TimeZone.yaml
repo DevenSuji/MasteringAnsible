@@ -1,0 +1,7 @@
+---
+- name: Changing Time Zones to Asia Kolkata
+  hosts: all
+  tasks:
+    - name: Set timezone to Asia/Kolkata
+      community.general.timezone:
+        name: Asia/Kolkata
