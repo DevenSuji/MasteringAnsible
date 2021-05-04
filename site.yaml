@@ -5,6 +5,6 @@
     - name: This is the {{ web_package }} package
       debug:
         msg: "Installing {{ web_package }}"
-    - name: This is the {{ web_service }}
+    - name: This is the {{ web_service }} service
       debug:
         msg: "Starting {{ web_service }}"
