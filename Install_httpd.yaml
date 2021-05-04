@@ -1,0 +1,22 @@
+---
+- name: Install HTTPD
+  hosts: clients
+  tasks:
+    - name: Installing the HTTPD Package
+      package:
+        name: httpd
+        state: present
+    - name: Create and index file
+      copy:
+        content: "Welcome to the webserver deployed by Ansible"
+        dest: /var/html/index.html
+    - name: Starting the httpd service
+      service:
+        name: httpd
+        state: started
+        enabled: true
+    - name: Opening the holes on the firewall
+      firewalld:
+        service: http
+        permanent: yes
+        state: enabled
