@@ -1,0 +1,8 @@
+---
+- name: First Playbook
+  hosts: all
+  tasks:
+  - name: Printing on the screen
+    debug:
+      msg: Understanding the debug module!!!
+...
