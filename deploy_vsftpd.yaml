@@ -1,0 +1,19 @@
+---
+- name: Deploying VSFTPD
+  hosts: clients
+  tasks:
+  - name: Installing the VSFTPD Binaries
+    yum:
+      name: vsftpd
+      state: installed
+  - name: Enabling the VSFTPD Service
+    service:
+      name: vsftpd
+      enabled: true
+  - name: Inserting a README File
+    copy:
+      content: "Welcome to the Very Secured FTP Server Deployed Via Ansible Core"
+      dest: /var/ftp/pub/README
+      force: no
+      mode: 0444
+...
