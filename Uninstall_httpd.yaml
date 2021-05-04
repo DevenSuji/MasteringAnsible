@@ -8,7 +8,7 @@
         state: absent
     - name: Removing the Index File
       ansible.builtin.file:
-        path: /var/html/index.html
+        path: /var/www/html/index.html
         state: absent
     - name: Opening the holes on the firewall
       firewalld:

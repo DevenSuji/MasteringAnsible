@@ -9,7 +9,7 @@
     - name: Create and index file
       copy:
         content: "Welcome to the webserver deployed by Ansible"
-        dest: /var/html/index.html
+        dest: /var/www/html/index.html
     - name: Starting the httpd service
       service:
         name: httpd
