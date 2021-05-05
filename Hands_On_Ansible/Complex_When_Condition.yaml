@@ -1,0 +1,13 @@
+---
+- name: Using Complex and Multiple When Conditions
+  hosts: all
+  tasks:
+    - package:
+        name: httpd
+        state: present
+      when: >
+        (ansible_distribution == "RedHat" and 
+        ansible_memfree_mb > 50)
+        or
+        (ansible_distribution == "CentOS" and 
+        ansible_memfree_mb > 50)
