@@ -1,0 +1,15 @@
+---
+- name: Learning Advance When Condition
+  gather_facts: yes
+  hosts: all
+  vars:
+    supported_distros:
+      - RedHat
+      - CentOS
+      - Fedora
+  tasks:
+    - name: Install RedHat Family Specific Packages
+      yum:
+        name: nginx
+        state: present
+      when: ansible_distribution in supported_distros
