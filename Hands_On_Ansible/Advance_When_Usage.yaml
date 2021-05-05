@@ -11,5 +11,5 @@
     - name: Install RedHat Family Specific Packages
       yum:
         name: nginx
-        state: present
+        state: absent
       when: ansible_distribution in supported_distros
