@@ -1,0 +1,12 @@
+---
+- name: Demonstrating failed_when condition
+  hosts: all
+  tasks:
+    - name: Run a script
+      command: echo hello world
+      ignore_errors: yes
+      register: command_result
+      failed_when: "'world' in command_result.stdout"
+    - name: Checking to see if we get there
+      debug:
+        msg: I LOVE YOU ANKITA SINGH
