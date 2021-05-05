@@ -10,3 +10,6 @@
     - name: Checking to see if we get there
       debug:
         msg: I LOVE YOU ANKITA SINGH
+    - name: Checking output of the first task
+      debug:
+        msg: "{{ command_result.stdout }}"
