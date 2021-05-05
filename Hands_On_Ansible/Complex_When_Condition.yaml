@@ -4,7 +4,7 @@
   tasks:
     - package:
         name: httpd
-        state: absent
+        state: present
       when: >
         (ansible_distribution == "RedHat" and 
         ansible_memfree_mb > 50)
