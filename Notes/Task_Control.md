@@ -9,3 +9,5 @@ To control the tasks we have various control options in place.
 3. When: It is a condition that is used against facts to derive a boolean result. Apply when condition at the task level.
 
 4. Handler: It is a trigger that makes Handler a conditional task. For eaxmaple If Task A has run successfully then Only Run Task B. Now this task B will be the handler task.
+
+5. Failed_When: It is a condition that deems the task as a failed task then the condition is met.

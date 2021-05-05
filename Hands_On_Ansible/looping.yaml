@@ -1,0 +1,13 @@
+---
+- name: Demonstrating how loop works
+  hosts: all
+  vars:
+    my_services:
+      - crond
+      - sshd
+  tasks:
+    - name: Start Some Services
+      service:
+        name: "{{ item }}"
+        state: started
+      loop: "{{ my_services }}"
