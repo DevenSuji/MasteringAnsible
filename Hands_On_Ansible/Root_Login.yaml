@@ -1,15 +1,21 @@
 ---
 - name: Disabling the Root Login on all the systems
-  hosts: all
+  hosts: clients
   tasks:
     - name: Changing the sshd_config File
       lineinfile:
         dest: /etc/ssh/sshd_config
         regexp: "^PermitRootLogin"
-        line: "PermitRootLogin no"
+        line: "PermitRootLogin yes"
+      notify: reboot system
     - name: Validating the Change
       ansible.builtin.shell: cat /etc/ssh/sshd_config | grep -i PermitRootLogin
       register: RootLoginStatus
     - name: Viewing the Change
       debug:
         msg: "{{ RootLoginStatus.stdout }}"
+    - name: reboot system
+      shell: sleep 2 && shutdown -r now "Ansible package updates triggered"
+      async: 1
+      poll: 0
+      ignore_errors: true
