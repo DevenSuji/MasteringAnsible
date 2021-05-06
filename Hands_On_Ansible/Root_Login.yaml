@@ -6,7 +6,7 @@
       lineinfile:
         dest: /etc/ssh/sshd_config
         regexp: "^PermitRootLogin"
-        line: "PermitRootLogin yes"
+        line: "PermitRootLogin no"
       notify: reboot system
     - name: Validating the Change
       ansible.builtin.shell: cat /etc/ssh/sshd_config | grep -i PermitRootLogin
