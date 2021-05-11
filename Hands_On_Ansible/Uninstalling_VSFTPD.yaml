@@ -1,0 +1,8 @@
+---
+- name: Uninstalling VSFTPD
+  hosts: all
+  tasks:
+    - name: Uninstalling the VSFTPD Package
+      package:
+        name: vsftpd
+        state: absent
