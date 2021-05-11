@@ -1,0 +1,6 @@
+[root@TheBeast ~]# vi ~/.bash_aliases
+alias update='sudo yum update'
+alias cls='clear'
+
+
+source ~/.bash_aliases
